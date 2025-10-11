@@ -2,7 +2,7 @@ name: Deploy Vroom to cPanel
 
 on:
   push:
-    branches: [ Release ]
+    branches: [ main ]
 
 jobs:
   deploy:
@@ -21,17 +21,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build and export Next.js app
+      - name: Build Next.js app
         run: |
-          echo "🚀 Building and exporting Vroom Next.js app..."
+          echo "🚀 Building Vroom Next.js app..."
           npm run build
-          npm run export
-          echo "✅ Export completed!"
-
-      - name: List exported files
-        run: |
-          echo "📂 Contents of out directory:"
-          ls -la out/
+          echo "✅ Build completed!"
 
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -40,7 +34,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/vroom/
-          local-dir: ./out/
+          local-dir: ./out/       # ✅ Static export directory
           protocol: ftp
           port: 21
           timeout: 60000
