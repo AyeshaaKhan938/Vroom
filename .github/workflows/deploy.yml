@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/vroom/
           local-dir: ./dist/       # ✅ Static export directory
-          protocol: ftp
-          port: 21
+          protocol: sftp      # ✅ use sftp instead of ftp
+          port: 22        
           timeout: 60000
           dangerous-clean-slate: true
