@@ -2,7 +2,7 @@ name: Deploy Vroom to cPanel
 
 on:
   push:
-    branches: [ main ]
+    branches: [ Release ]
 
 jobs:
   deploy:
