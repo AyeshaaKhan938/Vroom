@@ -2,11 +2,14 @@
   "name": "vroom",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "export": "next export",
-    "start": "next start"
+   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:clean": "rm -rf .next && npm run build",
+    "build:prod": "NODE_ENV=production npm run build:clean",
+    "deploy:check": "npm run build && npm run start &"
   },
   "dependencies": {
     "react": "19.1.0",
