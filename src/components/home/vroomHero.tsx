@@ -48,7 +48,7 @@ export default function VroomHero() {
   }, [currentIndex, direction]);
 
   return (
-    <div className="relative w-full  overflow-hidden">
+    <div className="relative w-full   overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
@@ -86,7 +86,7 @@ export default function VroomHero() {
           </div>
 
           {/* Leaderboard */}
-          <div className="text-[#E8E7E7] text-lg md:text-xl font-medium tracking-normal">
+          <div className="text-[#FFE0E0] text-lg md:text-xl font-medium tracking-normal">
             Leaderboard
           </div>
         </header>
@@ -181,26 +181,35 @@ export default function VroomHero() {
 
       {/* Fullscreen slide-in menu */}
       <div
-        className={`fixed inset-0 z-20 bg-black/90 backdrop-blur-sm transform transition-transform duration-500 ease-out ${
+        className={`fixed inset-0 z-20 bg-black/60 backdrop-blur-sm transform transition-transform duration-500 ease-out ${
           menuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          {/* keep background dimmed */}
-        </div>
-        <div className="relative h-full w-full text-white px-8 py-8 flex flex-col">
-          <button className="self-start mb-8" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-            <span className="text-3xl">×</span>
-          </button>
-          <nav className="flex-1 flex flex-col gap-6 text-3xl md:text-5xl font-light">
-            <a href="#events" className="hover:tracking-widest transition-all">Event and Tickets</a>
-            <a href="#experience" className="hover:tracking-widest transition-all">Experience</a>
-            <div className="mt-6 flex flex-col gap-3 text-base md:text-xl font-normal">
+        <div className="relative h-full w-full text-white px-6 md:px-8 py-4 flex flex-col">
+          {/* Menu header: Cross (left), Logo (center), Leaderboard (right) */}
+          <div className="flex items-center justify-between">
+            <button className="p-2" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+              <img src="/assets/images/cross-icon.svg" alt="Close" className="w-30 h-30 md:w-30 md:h-30" />
+            </button>
+            <div className="flex-1 flex justify-center">
+              <img src="/assets/images/Logo.png" alt="Vroom Logo" className="h-8 md:h-12" />
+            </div>
+            <div className="text-[#FFE0E0] text-xl md:text-xl tracking-normal">Leaderboard</div>
+          </div>
+
+          <div className="h-6 md:h-10" />
+          <nav className="flex-1 flex flex-col gap-2 text-3xl md:text-5xl font-light">
+            <a href="#events" className="hover:tracking-widest button-font transition-all">Event and Tickets</a>
+            <a href="#experience" className="hover:tracking-widest button-font transition-all">Experience</a>
+            <div className="mt-2 flex flex-col gap-3 text-lg button-font md:text-3xl font-light">
               <a href="#about">About Track</a>
               <a href="#media">Media and Community</a>
               <a href="#visit">Visit Us</a>
+             
             </div>
-            <a href="#contact" className="mt-auto text-4xl md:text-6xl">Contact Us</a>
+             <div className="mt-6 flex flex-col gap-3 text-lg md:text-3xl font-light">
+               <a href="#contact" className="mt-auto text-[#FFE0E0] text-3xl md:text-5xl">Contact Us</a>
+               </div>
           </nav>
         </div>
       </div>
