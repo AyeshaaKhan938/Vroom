@@ -86,6 +86,11 @@ export default function VroomEvents() {
               <div className="absolute bottom-1 right-8 z-10">
                 <button
                   className="text-black text-lg font-medium tracking-wide hover:tracking-widest transition-all"
+                  onClick={() => {
+                    if (event.button === 'Explore Now') {
+                      window.location.href = '/events';
+                    }
+                  }}
                 >
                   {event.button}
                 </button>
