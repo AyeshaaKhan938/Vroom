@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import VroomEvents from "./vroomEvents";
 import VroomExperiences from "./vroomExperiences";
 import VroomHero from "./vroomHero";
+import VroomAboutTrack from "./VroomAboutTrack";
+import VroomMediaCommunity from "./VroomMediaCommunity";
+import Footer from "./Footer";
 
 const Homepage = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -51,7 +54,11 @@ const Homepage = () => {
       {/* EXPERIENCES SECTION - normal scroll */}
       <div className="relative z-30 bg-white">
         <VroomExperiences />
+       
       </div>
+       <VroomAboutTrack/>
+       <VroomMediaCommunity/>
+       <Footer/>
     </>
   );
 };

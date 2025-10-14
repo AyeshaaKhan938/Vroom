@@ -7,6 +7,7 @@ export default function VroomHero() {
   const [nextIndex, setNextIndex] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState('up'); // 'up' for bottom-to-top, 'down' for top-to-bottom
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,20 +55,20 @@ export default function VroomHero() {
         loop
         muted
         playsInline
-        className="absolute top-0 left-0 w-full  object-cover brightness-50"
+        className={`absolute top-0 left-0 w-full  object-cover brightness-50 transition-opacity duration-300 ${menuOpen ? 'opacity-30' : 'opacity-100'}`}
       >
         <source src="/assets/videos/vroom-hero.mp4" type="video/mp4" />
       </video>
 
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+      <div className={`absolute top-0 left-0 w-full h-full bg-black transition-opacity duration-300 ${menuOpen ? 'opacity-60' : 'opacity-50'}`}></div>
 
 
       <div className="relative z-10 flex flex-col h-full">
 
         <header className="flex items-center justify-between px-6 py-4">
           {/* Hamburger Button */}
-          <button className="p-2">
+          <button className="p-2" onClick={() => setMenuOpen(true)}>
             <img
               src="/assets/images/hamburger.svg"
               alt="Menu"
@@ -175,6 +176,32 @@ export default function VroomHero() {
               className="w-3 h-3 ml-1"
             />
           </button>
+        </div>
+      </div>
+
+      {/* Fullscreen slide-in menu */}
+      <div
+        className={`fixed inset-0 z-20 bg-black/90 backdrop-blur-sm transform transition-transform duration-500 ease-out ${
+          menuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          {/* keep background dimmed */}
+        </div>
+        <div className="relative h-full w-full text-white px-8 py-8 flex flex-col">
+          <button className="self-start mb-8" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+            <span className="text-3xl">×</span>
+          </button>
+          <nav className="flex-1 flex flex-col gap-6 text-3xl md:text-5xl font-light">
+            <a href="#events" className="hover:tracking-widest transition-all">Event and Tickets</a>
+            <a href="#experience" className="hover:tracking-widest transition-all">Experience</a>
+            <div className="mt-6 flex flex-col gap-3 text-base md:text-xl font-normal">
+              <a href="#about">About Track</a>
+              <a href="#media">Media and Community</a>
+              <a href="#visit">Visit Us</a>
+            </div>
+            <a href="#contact" className="mt-auto text-4xl md:text-6xl">Contact Us</a>
+          </nav>
         </div>
       </div>
     </div>
