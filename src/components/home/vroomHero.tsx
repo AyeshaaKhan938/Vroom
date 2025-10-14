@@ -54,7 +54,7 @@ export default function VroomHero() {
         loop
         muted
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover brightness-50"
+        className="absolute top-0 left-0 w-full  object-cover brightness-50"
       >
         <source src="/assets/videos/vroom-hero.mp4" type="video/mp4" />
       </video>
