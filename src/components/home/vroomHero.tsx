@@ -1,5 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useModal } from '@/components/common/ModalProvider';
 
 export default function VroomHero() {
   const words = ['Drifting', 'Time Attack', 'Go Karting', 'And many more'];
@@ -7,7 +9,8 @@ export default function VroomHero() {
   const [nextIndex, setNextIndex] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState('up'); // 'up' for bottom-to-top, 'down' for top-to-bottom
-  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+  const { openModal } = useModal();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,20 +58,20 @@ export default function VroomHero() {
         loop
         muted
         playsInline
-        className={`absolute top-0 left-0 w-full  object-cover brightness-50 transition-opacity duration-300 ${menuOpen ? 'opacity-30' : 'opacity-100'}`}
+        className={`absolute top-0 left-0 w-full  object-cover brightness-50`}
       >
         <source src="/assets/videos/vroom-hero.mp4" type="video/mp4" />
       </video>
 
 
-      <div className={`absolute top-0 left-0 w-full h-full bg-black transition-opacity duration-300 ${menuOpen ? 'opacity-60' : 'opacity-50'}`}></div>
+      <div className={`absolute top-0 left-0 w-full h-full bg-black opacity-50`}></div>
 
 
       <div className="relative z-10 flex flex-col h-full">
 
         <header className="flex items-center justify-between px-6 py-4">
           {/* Hamburger Button */}
-          <button className="p-2" onClick={() => setMenuOpen(true)}>
+          <button className="p-2" onClick={() => openModal('menu')}>
             <img
               src="/assets/images/hamburger.svg"
               alt="Menu"
@@ -86,9 +89,12 @@ export default function VroomHero() {
           </div>
 
           {/* Leaderboard */}
-          <div className="text-[#FFE0E0] text-lg md:text-xl font-medium tracking-normal">
+          <button
+            className="text-[#FFE0E0] text-lg md:text-xl font-medium tracking-normal"
+            onClick={() => openModal('leaderboard')}
+          >
             Leaderboard
-          </div>
+          </button>
         </header>
 
      
@@ -176,41 +182,6 @@ export default function VroomHero() {
               className="w-3 h-3 ml-1"
             />
           </button>
-        </div>
-      </div>
-
-      {/* Fullscreen slide-in menu */}
-      <div
-        className={`fixed inset-0 z-20 bg-black/60 backdrop-blur-sm transform transition-transform duration-500 ease-out ${
-          menuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <div className="relative h-full w-full text-white px-6 md:px-8 py-4 flex flex-col">
-          {/* Menu header: Cross (left), Logo (center), Leaderboard (right) */}
-          <div className="flex items-center justify-between">
-            <button className="p-2" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-              <img src="/assets/images/cross-icon.svg" alt="Close" className="w-30 h-30 md:w-30 md:h-30" />
-            </button>
-            <div className="flex-1 flex justify-center">
-              <img src="/assets/images/Logo.png" alt="Vroom Logo" className="h-8 md:h-12" />
-            </div>
-            <div className="text-[#FFE0E0] text-xl md:text-xl tracking-normal">Leaderboard</div>
-          </div>
-
-          <div className="h-6 md:h-10" />
-          <nav className="flex-1 flex flex-col gap-2 text-3xl md:text-5xl font-light">
-            <a href="#events" className="hover:tracking-widest button-font transition-all">Event and Tickets</a>
-            <a href="#experience" className="hover:tracking-widest button-font transition-all">Experience</a>
-            <div className="mt-2 flex flex-col gap-3 text-lg button-font md:text-3xl font-light">
-              <a href="#about">About Track</a>
-              <a href="#media">Media and Community</a>
-              <a href="#visit">Visit Us</a>
-             
-            </div>
-             <div className="mt-6 flex flex-col gap-3 text-lg md:text-3xl font-light">
-               <a href="#contact" className="mt-auto text-[#FFE0E0] text-3xl md:text-5xl">Contact Us</a>
-               </div>
-          </nav>
         </div>
       </div>
     </div>

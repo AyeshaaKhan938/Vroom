@@ -7,7 +7,7 @@ export default function VroomMediaCommunity() {
     <section className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center text-center">
       {/* Background Video */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover brightness-30"
+        className="absolute top-0 left-0 w-full h-full object-cover brightness-50"
         src="/assets/videos/media.mp4"
         autoPlay
         muted

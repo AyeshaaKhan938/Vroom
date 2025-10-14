@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ModalProvider from "@/components/common/ModalProvider";
 
 export const metadata: Metadata = {
   title: "Vroom",
@@ -17,7 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="text/css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ModalProvider>
+          {children}
+        </ModalProvider>
+      </body>
     </html>
   );
 }

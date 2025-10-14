@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useModal } from "@/components/common/ModalProvider";
 
 export default function VroomEvents() {
   const events = [
@@ -29,21 +30,22 @@ export default function VroomEvents() {
     },
   ];
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+  const { openModal } = useModal();
 
   return (
     <section className="w-full bg-[#E8E7E7] px-6 pb-12">
       {/* Header */}
       <header className="w-full bg-[#E8E7E7] pt-12 text-black">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-2 sm:px-4 py-3">
-          <button className="p-2" onClick={() => setMenuOpen(true)}>
+          <button className="p-2" onClick={() => openModal('menu')}>
             <img
               src="/assets/images/hamburger-black.svg"
               alt="Menu"
               className="w-24 h-24 md:w-24 md:h-24"
             />
           </button>
-          <div className="text-base md:text-lg tracking-normal">Leaderboard</div>
+          <button className="text-base md:text-lg tracking-normal" onClick={() => openModal('leaderboard')}>Leaderboard</button>
         </div>
       </header>
 
@@ -84,7 +86,6 @@ export default function VroomEvents() {
               <div className="absolute bottom-1 right-8 z-10">
                 <button
                   className="text-black text-lg font-medium tracking-wide hover:tracking-widest transition-all"
-               
                 >
                   {event.button}
                 </button>
@@ -92,38 +93,6 @@ export default function VroomEvents() {
             </div>
           </div>
         ))}
-      </div>
-      {/* Fullscreen slide-in menu (Events) */}
-      <div
-        className={`fixed inset-0 z-30 bg-black/60 backdrop-blur-sm transform transition-transform duration-500 ease-out ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="relative h-full w-full text-white px-6 md:px-8 py-4 flex flex-col">
-          <div className="flex items-center justify-between">
-            <button className="p-2" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-              <img src="/assets/images/cross-icon.svg" alt="Close" className="w-30 h-30 md:w-30 md:h-30" />
-            </button>
-            <div className="flex-1 flex justify-center">
-              <img src="/assets/images/Logo.png" alt="Vroom Logo" className="h-8 md:h-12" />
-            </div>
-           <div className="text-[#FFE0E0] text-xl md:text-xl tracking-normal">Leaderboard</div>
-          </div>
-
-          <div className="h-6 md:h-10" />
-          <nav className="flex-1 flex flex-col gap-2 text-3xl md:text-5xl font-light">
-            <a href="#events" className="hover:tracking-widest button-font transition-all">Event and Tickets</a>
-            <a href="#experience" className="hover:tracking-widest button-font transition-all">Experience</a>
-            <div className="mt-2 flex flex-col gap-3 text-lg button-font md:text-3xl font-light">
-              <a href="#about">About Track</a>
-              <a href="#media">Media and Community</a>
-              <a href="#visit">Visit Us</a>
-            </div>
-            <div className="mt-6 flex flex-col gap-3 text-lg md:text-3xl font-light">
-              <a href="#contact" className="mt-auto text-[#FFE0E0] text-3xl md:text-5xl">Contact Us</a>
-            </div>
-          </nav>
-        </div>
       </div>
     </section>
   );
