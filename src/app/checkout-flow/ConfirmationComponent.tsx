@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function ConfirmationComponent() {
   return (
-    <div className="min-h-screen button-font bg-white">
+    <div className="min-h-screen satoshi-font bg-white">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,7 +75,7 @@ export default function ConfirmationComponent() {
               height={72}
             />
           </div>
-          <h1 className="text-4xl font-bold text-[#00C851] mb-4">
+          <h1 className="text-4xl font-bold button-font text-[#00C851] mb-4">
             Payment Successful!
           </h1>
           <p className="text-lg text-[#000000B2] mb-6">
@@ -94,7 +94,7 @@ export default function ConfirmationComponent() {
           <div className="lg:col-span-2 space-y-6">
             {/* Booking Details Card */}
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-6">
                 Booking Details
               </h2>
 
@@ -109,7 +109,7 @@ export default function ConfirmationComponent() {
                 />
 
                 <div className="w-full">
-                  <h3 className="font-semibold text-gray-900">
+                  <h3 className="font-semibold button-font text-gray-900">
                     Time Attack VIP Package
                   </h3>
 
@@ -233,7 +233,7 @@ export default function ConfirmationComponent() {
 
             {/* Payment Receipt Card */}
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-6">
                 Payment Receipt
               </h2>
 
@@ -256,10 +256,10 @@ export default function ConfirmationComponent() {
 
               <div className="border-t border-gray-200 pt-3 mb-4">
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold text-gray-900">
+                  <span className="font-semibold button-font text-gray-900">
                     Total Paid
                   </span>
-                  <span className="text-2xl font-bold text-green-600">
+                  <span className="text-2xl button-font font-bold text-green-600">
                     PKR 14,625
                   </span>
                 </div>
@@ -289,7 +289,7 @@ export default function ConfirmationComponent() {
           <div className="space-y-6">
             {/* Quick Actions Card */}
             <div className="bg-[#F5F5F5] rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
                 Quick Actions
               </h2>
               <div className="space-y-3">
@@ -334,7 +334,7 @@ export default function ConfirmationComponent() {
 
             {/* Next Steps Card */}
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
                 Next Steps
               </h2>
               <div className="space-y-4">
@@ -382,7 +382,7 @@ export default function ConfirmationComponent() {
 
             {/* Need Help Card */}
             <div className="bg-[#F5F5F5] rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
                 Need Help?
               </h2>
               <div className="space-y-3">

@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nico+Moji&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @import "tailwindcss";
+
+/* ──────────── Gemunu Libre ──────────── */
 @font-face {
   font-family: 'Gemunu Libre';
   src: url('/fonts/GemunuLibre-Regular.ttf') format('truetype');
@@ -8,11 +12,7 @@
   font-style: normal;
 }
 
-.button-font {
-  font-family: 'Gemunu Libre', sans-serif;
-}
-
-
+/* ──────────── Nico Moji ──────────── */
 @font-face {
   font-family: 'Nico Moji';
   src: url('/fonts/NicoMoji-Regular.ttf') format('truetype');
@@ -21,10 +21,18 @@
   font-display: swap;
 }
 
+/* ──────────── Font Utility Classes ──────────── */
+.button-font {
+  font-family: 'Gemunu Libre', sans-serif;
+}
 
-
-
-
+.satoshi-font {
+  font-family: 'Satoshi', sans-serif;
+}
+.space-font {
+  font-family: 'Space Grotesk', sans-serif;
+}
+/* ──────────── Theme Variables ──────────── */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -37,6 +45,7 @@
   }
 }
 
+/* ──────────── Base Layer ──────────── */
 @layer base {
   body {
     background: var(--background);

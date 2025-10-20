@@ -57,7 +57,7 @@ export default function CartComponent({
       </header>
 
       {/* Breadcrumb Navigation */}
-      <div className="bg-[#F5F5F5] button-font py-4">
+      <div className="bg-[#F5F5F5] satoshi-font py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-2 text-sm">
             <span className="text-gray-400">Cart</span>
@@ -93,7 +93,7 @@ export default function CartComponent({
                       height={200}
                       className="w-full h-48 object-cover"
                     />
-                    <div className="absolute top-4 left-4 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-sm font-mono">
+                    <div className="absolute top-4 satoshi-font left-4 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-sm font-mono">
                       1:36
                     </div>
                   </div>
@@ -112,7 +112,7 @@ export default function CartComponent({
                           alt="Vroom Logo"
                           className="h-1 mr-2"
                         />
-                        <span className="text-gray-700 button-font">
+                        <span className="text-gray-700 satoshi-font">
                           VIP Package
                         </span>
                       </div>
@@ -135,7 +135,7 @@ export default function CartComponent({
                   </div>
 
                   {/* Details Grid */}
-                  <div className="grid grid-cols-2 button-font gap-4 mb-4">
+                  <div className="grid grid-cols-2 satoshi-font gap-4 mb-4">
                     <div>
                       <div className="text-sm text-gray-600">Date & Time</div>
                       <div className="text-gray-900">
@@ -157,7 +157,7 @@ export default function CartComponent({
                   </div>
 
                   {/* Quantity and Price */}
-                  <div className="flex items-center button-font justify-between">
+                  <div className="flex items-center satoshi-font justify-between">
                     <div className="flex items-center button-font space-x-4">
                       <span className="text-gray-700">Quantity:</span>
                       <div className="flex items-center border border-gray-300 rounded-lg">
@@ -178,7 +178,7 @@ export default function CartComponent({
                         </button>
                       </div>
                     </div>
-                    <div className="text-2xl font-bold text-red-600">
+                    <div className="text-2xl font-bold satoshi-font text-red-600">
                       PKR {subtotal.toLocaleString()}
                     </div>
                   </div>
@@ -187,8 +187,8 @@ export default function CartComponent({
             </div>
 
             {/* VIP Package Includes */}
-            <div className="bg-[#F5F5F5] rounded-lg button-font p-6 mb-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
+            <div className="bg-[#F5F5F5] rounded-lg  p-6 mb-6">
+              <h3 className="text-lg font-bold button-font text-gray-900 mb-4">
                 VIP Package Includes:
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -199,7 +199,7 @@ export default function CartComponent({
                     width={22}
                     height={22}
                   />
-                  <span className="text-gray-700 ml-2">
+                  <span className="text-gray-700 satoshi-font ml-2">
                     Professional timing equipment
                   </span>
                 </div>
@@ -210,7 +210,7 @@ export default function CartComponent({
                     width={22}
                     height={22}
                   />
-                  <span className="text-gray-700 ml-2">
+                  <span className="text-gray-700 satoshi-font ml-2">
                     Personal race instructor
                   </span>
                 </div>
@@ -221,7 +221,7 @@ export default function CartComponent({
                     width={22}
                     height={22}
                   />
-                  <span className="text-gray-700 ml-2">
+                  <span className="text-gray-700 satoshi-font ml-2">
                     Professional photography
                   </span>
                 </div>
@@ -232,7 +232,7 @@ export default function CartComponent({
                     width={22}
                     height={22}
                   />
-                  <span className="text-gray-700 ml-2">
+                  <span className="text-gray-700 satoshi-font ml-2">
                     Complimentary refreshments
                   </span>
                 </div>
@@ -240,8 +240,8 @@ export default function CartComponent({
             </div>
 
             {/* Promotional Code */}
-            <div className="border border-gray-100 button-font rounded-lg p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
+            <div className="border border-gray-100  rounded-lg p-6">
+              <h3 className="text-lg font-bold button-font text-gray-900 mb-4">
                 Promotional Code
               </h3>
               <div className="flex gap-3">
@@ -252,7 +252,7 @@ export default function CartComponent({
                   onChange={(e) => setPromoCode(e.target.value)}
                   className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
-                <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                <button className="bg-red-600 satoshi-font text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
                   Apply
                 </button>
               </div>
@@ -260,14 +260,14 @@ export default function CartComponent({
           </div>
 
           {/* Right Column - Order Summary */}
-          <div className="lg:col-span-1 button-font">
+          <div className="lg:col-span-1">
             <div className="bg-gray-50 rounded-lg p-6 sticky top-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-6">
                 Order Summary
               </h2>
 
               {/* Cost Breakdown */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-6 satoshi-font">
                 <div className="flex justify-between text-gray-700">
                   <span>Subtotal (1 item)</span>
                   <span>PKR {subtotal.toLocaleString()}</span>
@@ -285,15 +285,15 @@ export default function CartComponent({
               {/* Total */}
               <div className="border-t border-gray-300 pt-4 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-bold text-gray-900">Total</span>
-                  <span className="text-2xl font-bold text-red-600">
+                  <span className="text-lg font-bold button-font text-gray-900">Total</span>
+                  <span className="text-2xl satoshi-font font-bold text-red-600">
                     PKR {total.toLocaleString()}
                   </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 satoshi-font mb-6">
                 <button
                   onClick={onContinueToBilling}
                   className="w-full bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center"
@@ -321,7 +321,7 @@ export default function CartComponent({
               </div>
 
               {/* Secure Checkout */}
-              <div className="bg-white rounded-lg p-4">
+              <div className="bg-white satoshi-font rounded-lg p-4">
                 <div className="flex items-center mb-2">
                   <Image
                     src="/assets/images/badge.svg"
@@ -329,7 +329,7 @@ export default function CartComponent({
                     width={26}
                     height={26}
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 button-font font-medium">
                     Secure Checkout
                   </span>
                 </div>

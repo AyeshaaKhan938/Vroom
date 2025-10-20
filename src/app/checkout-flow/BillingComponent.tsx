@@ -46,7 +46,7 @@ export default function BillingComponent({
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen satoshi-font bg-white">
       {/* Header */}
       <header className="bg-[#F5F5F5] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,7 +82,7 @@ export default function BillingComponent({
       </header>
 
       {/* Breadcrumb Navigation */}
-      <div className="bg-[#F5F5F5] button-font py-4">
+      <div className="bg-[#F5F5F5] satoshi-font py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-2 text-sm">
             <span className="text-gray-400">Cart</span>
@@ -97,17 +97,17 @@ export default function BillingComponent({
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 button-font sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Billing Information */}
           <div className="lg:col-span-2">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl font-bold button-font  text-gray-900 mb-6">
               Billing Information
             </h1>
 
             {/* Personal Information */}
             <div className="bg-gray-50 rounded-lg p-6 mb-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
                 Personal Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -172,7 +172,7 @@ export default function BillingComponent({
 
             {/* Address Information */}
             <div className="bg-gray-50 rounded-lg p-6 mb-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
                 Address Information
               </h2>
               <div className="space-y-4">
@@ -257,8 +257,8 @@ export default function BillingComponent({
             </div>
 
             {/* Emergency Contact */}
-            <div className="bg-gray-50 rounded-lg p-6 mb-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <div className="bg-gray-50  rounded-lg p-6 mb-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
                 Emergency Contact
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -314,7 +314,7 @@ export default function BillingComponent({
 
             {/* Additional Options */}
             <div className="bg-gray-50 rounded-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
                 Additional Options
               </h2>
               <div className="space-y-4">
@@ -351,7 +351,7 @@ export default function BillingComponent({
           {/* Right Column - Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-[#F5F5F5] rounded-lg p-6 sticky top-8">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-6">
                 Order Summary
               </h2>
 
@@ -368,7 +368,7 @@ export default function BillingComponent({
                     />
                   </div>
                   <div>
-                    <h3 className="font-bold text-gray-900">Time Attack</h3>
+                    <h3 className="font-bold  button-font text-gray-900">Time Attack</h3>
                     <p className="text-sm text-gray-600">VIP Package</p>
                   </div>
                 </div>
@@ -407,7 +407,7 @@ export default function BillingComponent({
               {/* Total */}
               <div className="border-t border-gray-300 pt-4 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-bold text-gray-900">Total</span>
+                  <span className="text-lg font-bold button-font text-gray-900">Total</span>
                   <span className="text-2xl font-bold text-red-600">
                     PKR {total.toLocaleString()}
                   </span>
@@ -451,7 +451,7 @@ export default function BillingComponent({
                     width={27}
                     height={27}
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 button-font font-medium">
                     Secure Checkout
                   </span>
                 </div>
