@@ -34,9 +34,9 @@ export default function VroomEvents() {
   const { openModal } = useModal();
 
   return (
-    <section className="w-full bg-[#E8E7E7] px-6 pb-12">
+    <section className="w-full bg-[#F5F5F5] px-6 pb-12">
       {/* Header */}
-      <header className="w-full bg-[#E8E7E7] pt-12 text-black">
+      <header className="w-full bg-[#F5F5F5] pt-12 text-black">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-2 sm:px-4 py-3">
           <button className="p-2" onClick={() => openModal('menu')}>
             <img

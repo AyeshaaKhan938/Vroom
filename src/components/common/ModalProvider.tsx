@@ -1,6 +1,7 @@
 'use client'
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import Modal from './Modal'
+import Link from 'next/link'
 
 type ModalType = 'menu' | 'leaderboard' | null
 
@@ -43,7 +44,13 @@ export default function ModalProvider({ children }: { children: ReactNode }) {
           <div className="h-6 md:h-10" />
           <nav className="flex-1 flex flex-col gap-2 text-3xl md:text-5xl font-light">
             <a href="#events" className="hover:tracking-widest button-font transition-all">Event and Tickets</a>
-            <a href="#experience" className="hover:tracking-widest button-font transition-all">Experience</a>
+            <Link
+    href="/experiences"
+    className="hover:tracking-widest button-font transition-all"
+    onClick={closeModal}
+  >
+    Experience
+  </Link>
             <div className="mt-2 flex flex-col gap-3 text-lg button-font md:text-3xl font-light">
               <a href="#about">About Track</a>
               <a href="#media">Media and Community</a>
