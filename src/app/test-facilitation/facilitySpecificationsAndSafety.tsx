@@ -3,22 +3,22 @@ import Image from 'next/image';
 export default function FacilitySpecificationsAndSafety() {
   const facilitySpecs = [
     {
-      icon: 'icon47.svg',
+      icon: 'tsf1.svg',
       title: 'Track Length',
       description: '2.5km professional racing circuit with multiple configurations'
     },
     {
-      icon: 'icon48.svg',
+      icon: 'tsf2.svg',
       title: 'Timing Accuracy',
       description: '±0.001 second precision with sector timing and speed traps'
     },
     {
-      icon: 'icon49.svg',
+      icon: 'tsf3.svg',
       title: 'Data Acquisition',
       description: '32-channel telemetry system with real-time monitoring'
     },
     {
-      icon: 'icon50.svg',
+      icon: 'tsf4.svg',
       title: 'Power Supply',
       description: '110V/220V power outlets available in all pit areas'
     }
@@ -26,22 +26,22 @@ export default function FacilitySpecificationsAndSafety() {
 
   const safetyProtocols = [
     {
-      icon: 'icon51.svg',
+      icon: 'tsf5.svg',
       title: 'Safety Equipment',
       description: 'FIA-approved helmets, HANS devices, and fire extinguishers required'
     },
     {
-      icon: 'icon52.svg',
+      icon: 'tsf6.svg',
       title: 'Medical Support',
       description: 'On-site medical team and ambulance during all testing sessions'
     },
     {
-      icon: 'icon53.svg',
+      icon: 'tsf7.svg',
       title: 'Vehicle Inspection',
       description: 'Mandatory technical inspection before track access'
     },
     {
-      icon: 'icon54.svg',
+      icon: 'tsf8.svg',
       title: 'Safety Briefing',
       description: 'Comprehensive safety briefing mandatory for all participants'
     }
@@ -76,8 +76,8 @@ export default function FacilitySpecificationsAndSafety() {
                     <Image
                       src={`/assets/images/${spec.icon}`}
                       alt={spec.title}
-                      width={20}
-                      height={20}
+                      width={27}
+                      height={27}
                       className="text-red-600"
                     />
                   </div>
@@ -106,8 +106,8 @@ export default function FacilitySpecificationsAndSafety() {
                     <Image
                       src={`/assets/images/${protocol.icon}`}
                       alt={protocol.title}
-                      width={20}
-                      height={20}
+                      width={27}
+                      height={27}
                       className="text-red-600"
                     />
                   </div>
@@ -161,7 +161,7 @@ export default function FacilitySpecificationsAndSafety() {
                 {requiredDocumentation.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <Image
-                      src={`/assets/images/${item.icon}`}
+                      src='/assets/images/file.svg'
                       alt="document"
                       width={18}
                       height={18}
