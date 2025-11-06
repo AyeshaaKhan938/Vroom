@@ -233,7 +233,7 @@ export default function TestingRegistrationForm() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-red-600 button-font hover:bg-red-700 text-white font-semibold py-4 rounded-lg transition-colors"
+              className="w-full cursor-pointer bg-red-600 button-font hover:bg-red-700 text-white font-semibold py-4 rounded-lg transition-colors"
             >
               Book Testing Session
             </button>

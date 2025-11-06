@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 export default function About() {
   const handleScrollDown = () => {
@@ -15,32 +16,14 @@ export default function About() {
   }
 
   return (
-    <section className="relative w-full  overflow-hidden">
+    <section className="relative mt-48 w-full  overflow-hidden">
      
      
 
       {/* Content */}
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col">
         {/* Top bar */}
-        <header className="flex items-center justify-between py-4">
-          <button className="p-2">
-            <img
-              src="/assets/images/hamburger-black.svg"
-              alt="Menu"
-              className="w-30 h-30 md:w-30 md:h-30"
-            />
-          </button>
-          <div className="flex-1 flex justify-center">
-            <img
-              src="/assets/images/Logo.png"
-              alt="Vroom Logo"
-              className="h-8 md:h-10"
-            />
-          </div>
-          <div className="text-black text-base md:text-lg tracking-normal">
-            Leaderboard
-          </div>
-        </header>
+       
 
  
     <div className=" bg-[#F5F5F5]">
@@ -185,9 +168,11 @@ export default function About() {
           It was built using the circuit – it's about everything. From the adrenaline challenge to memorable events and guard duty, our racing facilities enthusiasts take feel for every event.
         </p>
 
-        <button className="bg-red-600 text-white px-6 py-3 rounded font-medium hover:bg-red-700 transition-colors">
-          Book an Experience
-        </button>
+      <Link href="/register-as-racer">
+  <button className="bg-red-600 cursor-pointer  text-white px-6 py-3 rounded font-medium hover:bg-red-700 transition-colors">
+    Book an Experience
+  </button>
+</Link>
       </div>
 
       {/* Visit the Circuit Section */}
@@ -196,9 +181,11 @@ export default function About() {
         <p className="text-gray-700 mb-6 max-w-2xl mx-auto px-6">
           See us at the Vroom Racing Circuit and experience the thrill of motorsport in Machala.
         </p>
-        <button className="bg-red-600 text-white px-8 py-3 rounded font-medium hover:bg-red-700 transition-colors">
-          Get Directions
+              <Link href="/events">
+        <button className="bg-red-600 cursor-pointer text-white px-8 py-3 rounded font-medium hover:bg-red-700 transition-colors">
+          Upcoming Events
         </button>
+        </Link>
       </div>
     </div>
   

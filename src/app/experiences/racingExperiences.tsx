@@ -86,7 +86,7 @@ const RacingExperiences = () => {
               {/* Price and Button */}
               <div className="flex items-center justify-between">
                 <span className="text-red-600 button-font font-semibold">{exp.price}</span>
-                <button className="bg-red-600 button-font hover:bg-red-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors">
+                <button className="bg-red-600 cursor-pointer button-font hover:bg-red-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors">
                   {exp.buttonText}
                 </button>
               </div>
@@ -125,7 +125,7 @@ const RacingExperiences = () => {
 
           <div className="flex items-center justify-between">
             <span className="text-red-600 button-font font-semibold">From PKR 12,000/Day</span>
-            <button className="bg-red-600 hover:bg-red-700 button-font text-white px-6 py-2 rounded text-sm font-medium transition-colors">
+            <button className="bg-red-600 cursor-pointer hover:bg-red-700 button-font text-white px-6 py-2 rounded text-sm font-medium transition-colors">
               View More
             </button>
           </div>

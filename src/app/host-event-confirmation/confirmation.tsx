@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Confirmation() {
   const [formData, setFormData] = useState({
@@ -105,11 +106,14 @@ export default function Confirmation() {
 
         {/* Button */}
         <div className="flex justify-center">
+          <Link href="/events">
+
           <button
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-20 py-3 rounded-md transition-colors"
+            className="bg-red-600 cursor-pointer hover:bg-red-700 text-white font-semibold px-20 py-3 rounded-md transition-colors"
           >
             Go to Events
           </button>
+          </Link>
         </div>
       </div>
     </div>

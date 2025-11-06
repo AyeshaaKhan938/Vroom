@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -42,9 +43,9 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-normal mb-4 uppercase text-gray-300">Events</h3>
             <ul className="space-y-2 text-base button-font">
-              <li><a href="#" className="hover:text-gray-200">Upcoming Events</a></li>
-              <li><a href="#" className="hover:text-gray-200">Past Events</a></li>
-              <li><a href="#" className="hover:text-gray-200">Host an Event</a></li>
+             <li><Link href="/events" className="hover:text-gray-200">Upcoming Events</Link></li>
+             <li><Link href="/past-an-event" className="hover:text-gray-200">Past Events</Link></li>
+<li><Link href="/host-an-event" className="hover:text-gray-200">Host an Event</Link></li>
             </ul>
           </div>
 
@@ -52,11 +53,11 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-normal mb-4 uppercase text-gray-300">Experiences</h3>
             <ul className="space-y-2 text-base button-font">
-              <li><a href="#" className="hover:text-gray-200">Time Attack</a></li>
-              <li><a href="#" className="hover:text-gray-200">Go Karting</a></li>
-              <li><a href="#" className="hover:text-gray-200">Drifting</a></li>
-              <li><a href="#" className="hover:text-gray-200">Corporate Packages</a></li>
-              <li><a href="#" className="hover:text-gray-200">Test Facilitation</a></li>
+               <li><Link href="/time-attack" className="hover:text-gray-200">Time Attack</Link></li>
+    <li><Link href="/go-karting" className="hover:text-gray-200">Go Karting</Link></li>
+    <li><Link href="/drifting" className="hover:text-gray-200">Drifting</Link></li>
+    <li><Link href="/corporate-packages" className="hover:text-gray-200">Corporate Packages</Link></li>
+    <li><Link href="/test-facilitation" className="hover:text-gray-200">Test Facilitation</Link></li>
             </ul>
           </div>
 
@@ -64,8 +65,8 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-normal mb-4 uppercase text-gray-300">About</h3>
             <ul className="space-y-2 text-base button-font">
-              <li><a href="#" className="hover:text-gray-200">About Vroom</a></li>
-              <li><a href="#" className="hover:text-gray-200">Visit Us</a></li>
+               <li><Link href="/about-track" className="hover:text-gray-200">About Vroom</Link></li>
+          
             </ul>
           </div>
         </div>
@@ -87,13 +88,15 @@ const Footer = () => {
           {/* Info */}
           <div>
             <h3 className="text-xl font-normal mb-4 uppercase text-gray-300">Info</h3>
-            <a href="#" className="text-base button-font hover:text-gray-200">Data Protection Policy</a>
+            <a href="/host-an-event" className="text-base button-font hover:text-gray-200">Host an Event</a>
           </div>
 
           {/* Others */}
           <div>
             <h3 className="text-xl font-normal mb-4 uppercase text-gray-300">Others</h3>
-            <a href="#" className="text-base button-font hover:text-gray-200">Media and Community</a>
+            <Link href="/media-and-community" className="text-base button-font hover:text-gray-200">
+    Media and Community
+  </Link>
           </div>
         </div>
       </div>

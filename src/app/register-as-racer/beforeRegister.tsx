@@ -37,41 +37,9 @@ export default function BeforeRegister() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
+    <div className="min-h-screen mt-32 bg-[#F5F5F5]">
       {/* Header */}
-      <header className="bg-[#F5F5F5] border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Hamburger Menu */}
-            <button className="p-2">
-             <div className="flex-1 flex justify-center">
-                <img
-                  src="/assets/images/hamburger-black.svg"
-                  alt="Vroom Logo"
-                  className="h-3"
-                />
-              </div>
-            </button>
-
-            {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="relative">
-              
-                <div className="flex-1 flex justify-center">
-                  <img
-                    src="/assets/images/Logo.png"
-                    alt="Vroom Logo"
-                    className="h-8"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Leaderboard */}
-            <div className="text-gray-800 font-medium">Leaderboard</div>
-          </div>
-        </div>
-      </header>
+      
 
 <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12">
       <div className="bg-white shadow-md rounded-2xl max-w-3xl w-full p-8 md:p-12">
@@ -134,7 +102,7 @@ export default function BeforeRegister() {
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center mt-10 space-y-4 md:space-y-0">
          <button
   onClick={() => router.push('/register-as-racer/register')}
-  className="bg-red-600 hover:bg-red-700 text-white button-font font-medium py-2 px-6 rounded-lg transition-all shadow-sm flex items-center justify-center space-x-2"
+  className="bg-red-600 cursor-pointer hover:bg-red-700 text-white button-font font-medium py-2 px-6 rounded-lg transition-all shadow-sm flex items-center justify-center space-x-2"
 >
   <span>I Meet the Requirements</span>
   <Image
@@ -149,7 +117,7 @@ export default function BeforeRegister() {
 
           <button
             onClick={() => router.push('/')}
-            className="bg-[#FFE0E0] hover:bg-gray-300 text-gray-800 button-font font-semibold py-3 px-6 rounded-lg transition-all shadow-sm"
+            className="bg-[#FFE0E0] cursor-pointer hover:bg-gray-300 text-gray-800 button-font font-semibold py-3 px-6 rounded-lg transition-all shadow-sm"
           >
             Back to Home
           </button>

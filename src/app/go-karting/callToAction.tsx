@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import Link from "next/link";
 
 export default function CallToAction() {
   return (
@@ -19,7 +20,8 @@ memories.
 
         {/* CTA Button + Secure Text (side by side) */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-16">
-          <button className="bg-red-600 hover:bg-red-700 button-font text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg">
+          <Link href="/register-as-racer">
+          <button className="bg-red-600 cursor-pointer hover:bg-red-700 button-font text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg">
             Book Your Karting Experience
             <Image
               src="/assets/images/arrow.svg"
@@ -28,6 +30,7 @@ memories.
               height={27}
             />
           </button>
+          </Link>
         
         </div>
 

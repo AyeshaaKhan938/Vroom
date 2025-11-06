@@ -201,7 +201,7 @@ export default function CorporateRegistrationForm() {
              <div className="flex justify-center">
           <button
             type="submit"
-            className="bg-red-600 button-font hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg"
+            className="bg-red-600 cursor-pointer button-font hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg"
           >
             Request Corporate Proposal
             <Image

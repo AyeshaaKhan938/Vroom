@@ -139,7 +139,7 @@ export default function CorporatePackageTiers() {
                       Custom Quote
                     </span>
                   )}
-                  <button className={`${pkg.buttonStyle} font-semibold py-2 px-6 button-font rounded-lg transition-colors`}>
+                  <button className={`${pkg.buttonStyle} font-semibold py-2 cursor-pointer px-6 button-font rounded-lg transition-colors`}>
                     {pkg.buttonText}
                   </button>
                 </div>

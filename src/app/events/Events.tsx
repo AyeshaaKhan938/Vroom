@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import { useModal } from '@/components/common/ModalProvider'
 
 const sampleEvents = [
@@ -33,17 +34,9 @@ export default function EventsPage() {
   const { openModal } = useModal()
   return (
     <div className="min-h-screen w-full bg-[#FFFFFF]">
-      <header className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <button className="p-2" aria-label="Menu" onClick={() => openModal('menu')}>
-          <img src="/assets/images/hamburger-black.svg" alt="Menu" className="w-30 h-30 inset" />
-        </button>
-        <div className="flex-1 flex justify-center">
-          <img src="/assets/images/Logo.png" alt="Vroom Logo" className="h-8" />
-        </div>
-        <button className="text-black text-xl md:text-xl tracking-normal" onClick={() => openModal('leaderboard')}>Leaderboard</button>
-      </header>
+     
 
-      <main className="max-w-7xl mx-auto px-6 pb-12">
+      <main className="max-w-7xl mt-40 mx-auto px-6 pb-12">
         <h2 className=" text-2xl md:text-3xl text-black text-center mb-6">Upcoming Events</h2>
 
     <div className="flex justify-center pb-16">
@@ -68,21 +61,27 @@ export default function EventsPage() {
           </p>
 
       <div className="flex flex-col items-start gap-3 mt-auto">
-  {ev.ctaPrimary && (
-    <button className="px-3 py-2 button-font rounded-sm bg-[#E9574C] text-white text-xs w-full md:w-auto transition-colors duration-300 group-hover:bg-red-600">
-      {ev.ctaPrimary}
-    </button>
+ {ev.ctaPrimary && (
+    <Link href="/register-as-racer" className="w-full md:w-auto">
+      <button className="px-3 py-2 cursor-pointer button-font rounded-sm bg-[#E9574C] text-white text-xs w-full md:w-auto transition-colors duration-300 group-hover:bg-red-600">
+        {ev.ctaPrimary}
+      </button>
+    </Link>
   )}
-  {ev.ctaSecondary && (
-    <button className="px-3 py-2 button-font rounded-sm bg-[#E9574C] text-white text-xs w-full md:w-auto transition-colors duration-300 group-hover:bg-red-600">
+ {ev.ctaSecondary && (
+  <Link href="/event-ticket" className="w-full md:w-auto">
+    <button className="px-3 py-2 button-font cursor-pointer rounded-sm bg-[#E9574C] text-white text-xs w-full md:w-auto transition-colors duration-300 group-hover:bg-red-600">
       {ev.ctaSecondary}
     </button>
-  )}
-  {ev.cta && (
-    <button className="px-3 py-2 button-font rounded-sm bg-[#E9574C] text-white text-xs w-full md:w-auto transition-colors duration-300 group-hover:bg-red-600">
+  </Link>
+)}
+{ev.cta && (
+  <Link href="/event-ticket" className="w-full md:w-auto">
+    <button className="px-3 py-2 button-font cursor-pointer rounded-sm bg-[#E9574C] text-white text-xs w-full md:w-auto transition-colors duration-300 group-hover:bg-red-600">
       {ev.cta}
     </button>
-  )}
+  </Link>
+)}
 </div>
 
 

@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/components/common/ModalProvider";
 
@@ -18,7 +19,7 @@ export default function VroomEvents() {
       title: 'Host an Event',
       description:
         'Discover the rush of upcoming events, relive the excitement of past events, or take the wheel by hosting your own. From track days to community gatherings, every moment at Vroom fuels passion, speed, and adrenaline.',
-      button: 'Contact Us',
+      button: 'About Us',
     },
     {
       id: 3,
@@ -32,25 +33,56 @@ export default function VroomEvents() {
 
   const router = useRouter();
   const { openModal } = useModal();
+  const [isVisible, setIsVisible] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const heroHeight = window.innerHeight * 0.8; // Hero section is 80vh
+      const scrollThreshold = heroHeight; // Show when past hero section
+      
+      // Show events header when scrolled past hero section
+      // Hide when scrolling back up to hero section
+      if (currentScrollY > scrollThreshold) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    // Initial check
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
-    <section className="w-full bg-[#F5F5F5] px-6 pb-12">
-      {/* Header */}
-      <header className="w-full bg-[#F5F5F5] pt-12 text-black">
+    <section ref={sectionRef} className="w-full bg-[#F5F5F5] px-6 pb-12">
+      {/* Sticky Header - Only visible when scrolled down, replaces main header */}
+      <header 
+        className={`fixed top-16 left-0 right-0 z-[60] bg-[#F5F5F5] text-black transition-transform duration-300 ${
+          isVisible ? 'translate-y-0' : '-translate-y-full opacity-0 pointer-events-none'
+        }`}
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-2 sm:px-4 py-3">
-          <button className="p-2" onClick={() => openModal('menu')}>
+          <button className="p-2 cursor-pointer" onClick={() => openModal('menu')}>
             <img
               src="/assets/images/hamburger-black.svg"
               alt="Menu"
               className="w-24 h-24 md:w-24 md:h-24"
             />
           </button>
-          <button className="text-base md:text-lg tracking-normal" onClick={() => openModal('leaderboard')}>Leaderboard</button>
+          <button className="text-base md:text-lg tracking-normal cursor-pointer" onClick={() => openModal('leaderboard')}>Leaderboard</button>
         </div>
       </header>
 
       {/* Section Heading */}
-      <div className="max-w-7xl mx-auto mb-6">
+      <div className="max-w-7xl pt-24 mx-auto mb-6">
         <h2 className="text-3xl md:text-4xl ml-4 font-normal text-black button-font">
           Events
         </h2>
@@ -85,12 +117,16 @@ export default function VroomEvents() {
               {/* Button inside the cut */}
               <div className="absolute bottom-1 right-8 z-10">
                 <button
-                  className="text-black text-lg font-medium tracking-wide hover:tracking-widest transition-all"
-                  onClick={() => {
-                    if (event.button === 'Explore Now') {
-                      window.location.href = '/events';
-                    }
-                  }}
+                  className="text-black text-lg font-medium cursor-pointer tracking-wide hover:tracking-widest transition-all"
+                 onClick={() => {
+  if (event.button === 'Explore Now') {
+    router.push('/events');
+  } else if (event.button === 'About Track') {
+    router.push('/about-track');
+  } else if (event.button === 'Check out') {
+    router.push('/checkout-flow');
+  }
+}}
                 >
                   {event.button}
                 </button>

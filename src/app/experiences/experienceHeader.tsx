@@ -15,7 +15,7 @@ export default function ExperienceHeader() {
   }
 
   return (
-    <section className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden">
+    <section className="relative w-full h-[100vh] md:h-[90vh] overflow-hidden">
       {/* Background image */}
       <div
         className="absolute inset-0 bg-center bg-cover"
@@ -27,27 +27,6 @@ export default function ExperienceHeader() {
 
       {/* Content */}
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col">
-        {/* Top bar */}
-        <header className="flex items-center justify-between py-4">
-          <button className="p-2">
-            <img
-              src="/assets/images/hamburger.svg"
-              alt="Menu"
-              className="w-30 h-30 md:w-30 md:h-30"
-            />
-          </button>
-          <div className="flex-1 flex justify-center">
-            <img
-              src="/assets/images/Logo.png"
-              alt="Vroom Logo"
-              className="h-8 md:h-10"
-            />
-          </div>
-          <div className="text-[#E8E7E7] text-base md:text-lg tracking-normal">
-            Leaderboard
-          </div>
-        </header>
-
         {/* Headline */}
         <div className="flex-1 flex flex-col items-center justify-center text-center">
           <h1 className="text-white text-3xl button-font md:text-5xl font-semibold mb-3">

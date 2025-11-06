@@ -15,32 +15,14 @@ export default function Media() {
   }
 
   return (
-    <section className="relative w-full bg-[#F5F5F5]  overflow-hidden">
+    <section className="relative mt-48 w-full bg-[#F5F5F5]  overflow-hidden">
      
      
 
       {/* Content */}
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col">
         {/* Top bar */}
-        <header className="flex items-center justify-between py-4">
-          <button className="p-2">
-            <img
-              src="/assets/images/hamburger-black.svg"
-              alt="Menu"
-              className="w-30 h-30 md:w-30 md:h-30"
-            />
-          </button>
-          <div className="flex-1 flex justify-center">
-            <img
-              src="/assets/images/Logo.png"
-              alt="Vroom Logo"
-              className="h-8 md:h-10"
-            />
-          </div>
-          <div className="text-black text-base md:text-lg tracking-normal">
-            Leaderboard
-          </div>
-        </header>
+      
 
  
  <div className="min-h-screen ">

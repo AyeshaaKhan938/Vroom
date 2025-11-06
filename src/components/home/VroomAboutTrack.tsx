@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function VroomAboutTrack() {
   return (
@@ -28,9 +29,12 @@ export default function VroomAboutTrack() {
             meticulously <br/> designed circuit  offer an unmatched racing experience
             that will leave you <br/> craving for more.
           </p>
-          <button className="text-black font-normal text-2xl tracking-tight hover:text-red-600 transition">
-            View Track Now
-          </button>
+         <Link 
+  href="/events"
+  className="text-black cursor-pointer font-normal text-2xl tracking-tight hover:text-red-600 transition"
+>
+Upcoming Events
+</Link>
         </div>
 
         {/* Right Image Section */}
@@ -47,44 +51,121 @@ export default function VroomAboutTrack() {
         </div>
       </div>
 
-      {/* Logos Row */}
-      <div className="flex flex-wrap justify-center items-center gap-10 mt-10">
-        <Image
-          src="/assets/images/honda.png"
-          alt="Honda"
-          width={90}
-          height={40}
-        />
-        <Image
-          src="/assets/images/rifty-series.png"
-          alt="Rifty Series"
-          width={90}
-          height={40}
-        />
-        <Image
-          src="/assets/images/redline.png"
-          alt="Redline"
-          width={110}
-          height={40}
-        />
-        <Image
-          src="/assets/images/sa-gardens.png"
-          alt="SA Gardens"
-          width={100}
-          height={40}
-        />
-        <Image
-          src="/assets/images/Sagroup.png"
-          alt="SA Group"
-          width={90}
-          height={40}
-        />
-        <Image
-          src="/assets/images/tba.png"
-          alt="ABB Racing"
-          width={80}
-          height={40}
-        />
+      {/* Logos Row with Scrolling Animation */}
+      <div className="relative mt-10 overflow-hidden">
+        <style jsx>{`
+          @keyframes scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .animate-scroll {
+            animation: scroll 20s linear infinite;
+          }
+        `}</style>
+        
+        <div className="flex animate-scroll">
+          {/* First set of logos */}
+          <div className="flex items-center gap-10 px-5 shrink-0">
+            <Image
+              src="/assets/images/honda.png"
+              alt="Honda"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/rifty-series.png"
+              alt="Rifty Series"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/redline.png"
+              alt="Redline"
+              width={110}
+              height={40}
+            />
+            <Image
+              src="/assets/images/sa-gardens.png"
+              alt="SA Gardens"
+              width={100}
+              height={40}
+            />
+            <Image
+              src="/assets/images/Sagroup.png"
+              alt="SA Group"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/tba.png"
+              alt="ABB Racing"
+              width={80}
+              height={40}
+            />
+          </div>
+          
+          {/* Duplicate set of logos for seamless loop */}
+          <div className="flex items-center gap-10 px-5 shrink-0">
+            <Image
+              src="/assets/images/honda.png"
+              alt="Honda"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/rifty-series.png"
+              alt="Rifty Series"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/redline.png"
+              alt="Redline"
+              width={110}
+              height={40}
+            />
+            <Image
+              src="/assets/images/sa-gardens.png"
+              alt="SA Gardens"
+              width={100}
+              height={40}
+            />
+            <Image
+              src="/assets/images/Sagroup.png"
+              alt="SA Group"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/tba.png"
+              alt="ABB Racing"
+              width={80}
+              height={40}
+            />
+            <Image
+              src="/assets/images/honda.png"
+              alt="Honda"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/rifty-series.png"
+              alt="Rifty Series"
+              width={90}
+              height={40}
+            />
+            <Image
+              src="/assets/images/redline.png"
+              alt="Redline"
+              width={110}
+              height={40}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

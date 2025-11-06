@@ -39,42 +39,10 @@ export default function Register() {
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       {/* Header */}
-      <header className="bg-[#F5F5F5] border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Hamburger Menu */}
-            <button className="p-2">
-             <div className="flex-1 flex justify-center">
-                <img
-                  src="/assets/images/hamburger-black.svg"
-                  alt="Vroom Logo"
-                  className="h-3"
-                />
-              </div>
-            </button>
-
-            {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="relative">
-              
-                <div className="flex-1 flex justify-center">
-                  <img
-                    src="/assets/images/Logo.png"
-                    alt="Vroom Logo"
-                    className="h-8"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Leaderboard */}
-            <div className="text-gray-800 font-medium">Leaderboard</div>
-          </div>
-        </div>
-      </header>
+      
 
 
-    <div className="min-h-screen bg-[#F5F5F5] button-font py-12 px-4">
+    <div className="min-h-screen mt-32 bg-[#F5F5F5] button-font py-12 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -629,7 +597,7 @@ export default function Register() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              className="w-full cursor-pointer bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               COMPLETE REGISTRATION
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

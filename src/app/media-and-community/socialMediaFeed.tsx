@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Link from "next/link";
 
 
 export default function SocialMediaFeed() {
@@ -55,9 +56,11 @@ export default function SocialMediaFeed() {
             Explore partnership and sponsorship opportunities with Vroom Racing Circuit. 
             Align your brand with Pakistan’s premier motorsport venue and reach a passionate audience.
           </p>
-          <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2 rounded-lg">
+          <Link href="/host-an-event">
+          <button className="bg-red-600 cursor-pointer hover:bg-red-700 text-white font-medium px-6 py-2 rounded-lg">
             Contact for Partnership Inquiries
           </button>
+          </Link>
         </div>
       </div>
     </section>

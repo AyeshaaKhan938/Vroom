@@ -109,7 +109,7 @@ export default function PackageSelection() {
                 </ul>
 
                 {/* Select Button */}
-                <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded transition-colors flex items-center justify-center gap-2">
+                <button className="w-full bg-red-600 cursor-pointer hover:bg-red-700 text-white font-semibold py-3 px-6 rounded transition-colors flex items-center justify-center gap-2">
                   <Image
                     src="/assets/images/arrow.svg"
                     alt="arrow"

@@ -152,7 +152,7 @@ export default function GoKartingRegistrationForm() {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="bg-red-600 hover:bg-red-700 button-font text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg"
+            className="bg-red-600 cursor-pointer hover:bg-red-700 button-font text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg"
           >
             Complete Registration
             <Image

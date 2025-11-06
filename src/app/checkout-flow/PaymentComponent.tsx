@@ -42,41 +42,9 @@ export default function PaymentComponent({
   const formatTime = (value: number) => value.toString().padStart(2, "0");
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
+    <div className="min-h-screen mt-40 bg-[#F5F5F5]">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Hamburger Menu */}
-            <button className="p-2">
-              <div className="flex-1 flex justify-center">
-                <img
-                  src="/assets/images/hamburger-black.svg"
-                  alt="Vroom Logo"
-                  className="h-3"
-                />
-              </div>
-            </button>
-
-            {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="relative">
-                <div className="flex-1 flex justify-center">
-                  <img
-                    src="/assets/images/Logo.png"
-                    alt="Vroom Logo"
-                    className="h-8"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Leaderboard */}
-            <div className="text-gray-800 font-medium">Leaderboard</div>
-          </div>
-        </div>
-      </header>
-
+      
       {/* Main Content */}
       <div className="max-w-4xl mx-auto space-font px-4 sm:px-6 lg:px-8 py-8">
         {/* Order Received Card */}

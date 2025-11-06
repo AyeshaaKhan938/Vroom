@@ -22,7 +22,7 @@ export default function PastEventsResults() {
   ];
 
   return (
-    <div className="min-h-screen button-font bg-white">
+    <div className="min-h-screen mt-24 button-font bg-white">
       {/* Hero Section */}
       <div className="bg-black text-white px-6 py-16 md:px-12 lg:px-24">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -135,9 +135,7 @@ export default function PastEventsResults() {
               />
                 <span className="font-medium">Winner: Marcus Rodriguez</span>
               </div>
-              <a href="#" className="text-red-600 font-medium text-sm hover:underline">
-                Photo Gallery
-              </a>
+              
             </div>
           </div>
 
@@ -170,9 +168,7 @@ export default function PastEventsResults() {
               />
                 <span className="font-medium">Winner: Akira Tanaka</span>
               </div>
-              <a href="#" className="text-red-600 font-medium text-sm hover:underline">
-                Photo Gallery
-              </a>
+             
             </div>
           </div>
 
@@ -205,9 +201,7 @@ export default function PastEventsResults() {
               />
                 <span className="font-medium">Winner: TechCorp Team Alpha</span>
               </div>
-              <a href="#" className="text-red-600 font-medium text-sm hover:underline">
-                Photo Gallery
-              </a>
+             
             </div>
           </div>
 
@@ -240,9 +234,7 @@ export default function PastEventsResults() {
               />
                 <span className="font-medium">Winner: Sarah Chen</span>
               </div>
-              <a href="#" className="text-red-600 font-medium text-sm hover:underline">
-                Photo Gallery
-              </a>
+              
             </div>
           </div>
 
@@ -275,9 +267,7 @@ export default function PastEventsResults() {
               />
                 <span className="font-medium">Winner: Diego Martinez</span>
               </div>
-              <a href="#" className="text-red-600 font-medium text-sm hover:underline">
-                Photo Gallery
-              </a>
+             
             </div>
           </div>
 
@@ -310,9 +300,7 @@ export default function PastEventsResults() {
               />
                 <span className="font-medium">Winner: Team Velocity</span>
               </div>
-              <a href="#" className="text-red-600 font-medium text-sm hover:underline">
-                Photo Gallery
-              </a>
+              
             </div>
           </div>
         </div>

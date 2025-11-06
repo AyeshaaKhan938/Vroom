@@ -100,41 +100,9 @@ export default function Ticket() {
   };
 
   return (
-    <div className="min-h-screen button-font bg-white">
+    <div className="min-h-screen mt-40 button-font bg-white">
       {/* Header */}
-      <header className="bg-[#F5F5F5] border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Hamburger Menu */}
-            <button className="p-2">
-             <div className="flex-1 flex justify-center">
-                <img
-                  src="/assets/images/hamburger-black.svg"
-                  alt="Vroom Logo"
-                  className="h-3"
-                />
-              </div>
-            </button>
-
-            {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="relative">
-              
-                <div className="flex-1 flex justify-center">
-                  <img
-                    src="/assets/images/Logo.png"
-                    alt="Vroom Logo"
-                    className="h-8"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Leaderboard */}
-            <div className="text-gray-800 font-medium">Leaderboard</div>
-          </div>
-        </div>
-      </header>
+      
  <div className="min-h-screen  py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}

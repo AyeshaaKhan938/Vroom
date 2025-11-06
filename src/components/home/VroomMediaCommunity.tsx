@@ -30,7 +30,7 @@ export default function VroomMediaCommunity() {
           experiences <br/> turn into lifelong connections.
         </p>
         <a
-          href="#"
+          href="/media-and-community"
           className="text-[#ff3b3b] underline text-sm md:text-base font-normal tracking-wider hover:underline"
         >
           Checkout Media & Community

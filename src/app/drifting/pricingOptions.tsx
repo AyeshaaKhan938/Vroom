@@ -117,7 +117,7 @@ export default function PricingOptions() {
               </ul>
 
               {/* Select Button */}
-              <button className="w-full bg-red-600 button-font hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition-colors">
+              <button className="w-full cursor-pointer bg-red-600 button-font hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition-colors">
                 Select
               </button>
             </div>

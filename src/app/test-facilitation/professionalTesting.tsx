@@ -35,7 +35,7 @@ export default function ProfessionalTesting() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] py-12 px-4">
+    <div className="min-h-screen h-full bg-[#F5F5F5] py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

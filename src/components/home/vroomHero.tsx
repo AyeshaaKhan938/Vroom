@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useModal } from '@/components/common/ModalProvider';
 
 export default function VroomHero() {
   const words = ['Drifting', 'Time Attack', 'Go Karting', 'And many more'];
@@ -10,7 +9,6 @@ export default function VroomHero() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState('up'); // 'up' for bottom-to-top, 'down' for top-to-bottom
   const router = useRouter();
-  const { openModal } = useModal();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,7 +49,7 @@ export default function VroomHero() {
   }, [currentIndex, direction]);
 
   return (
-    <div className="relative w-full   overflow-hidden">
+    <div className="relative w-full h-full   overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
@@ -68,36 +66,6 @@ export default function VroomHero() {
 
 
       <div className="relative z-10 flex flex-col h-full">
-
-        <header className="flex items-center justify-between px-6 py-4">
-          {/* Hamburger Button */}
-          <button className="p-2" onClick={() => openModal('menu')}>
-            <img
-              src="/assets/images/hamburger.svg"
-              alt="Menu"
-              className="w-24 h-24 md:w-24 md:h-24"
-            />
-          </button>
-
-          {/* Logo */}
-          <div className="flex-1 flex justify-center">
-            <img
-              src="/assets/images/Logo.png"
-              alt="Vroom Logo"
-              className="h-12"
-            />
-          </div>
-
-          {/* Leaderboard */}
-          <button
-            className="text-[#FFE0E0] text-lg md:text-xl font-medium tracking-normal"
-            onClick={() => openModal('leaderboard')}
-          >
-            Leaderboard
-          </button>
-        </header>
-
-     
         <div className="flex-1 flex flex-col mt-20 items-center justify-center px-6 text-center">
           <h1 className="text-[#E8E7E7] mb-2">
             <span className="block text-4xl md:text-5xl lg:text-7xl font-normal tracking-normal mb-1">
@@ -162,10 +130,7 @@ export default function VroomHero() {
               </p>
             )}
           </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="pb-8 mt-24 flex flex-col items-center gap-4">
+            <div className="pb-8 mt-24  flex flex-col items-center gap-4">
           <button 
             onClick={() => {
               window.scrollTo({
@@ -183,6 +148,10 @@ export default function VroomHero() {
             />
           </button>
         </div>
+        </div>
+
+        {/* Bottom Section */}
+      
       </div>
     </div>
   );
