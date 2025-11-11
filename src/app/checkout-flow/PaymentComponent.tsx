@@ -1,22 +1,48 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import type {
+  CheckoutOrder,
+  PaymentPayload,
+} from "./types";
 
 interface PaymentComponentProps {
-  onProceedToConfirmation: () => void;
+  order: CheckoutOrder;
+  onProceedToConfirmation: (payload: PaymentPayload) => Promise<void>;
+  loading: boolean;
+  error?: string | null;
 }
 
+const PAYMENT_METHODS = [
+  { id: "card", label: "Card Payment" },
+  { id: "easypaisa", label: "Easypaisa" },
+  { id: "jazzcash", label: "JazzCash" },
+  { id: "bank", label: "Bank Transfer" },
+];
+
+const TIMER_SEGMENTS = ["hours", "minutes", "seconds"] as const;
+
 export default function PaymentComponent({
+  order,
   onProceedToConfirmation,
+  loading,
+  error,
 }: PaymentComponentProps) {
-  const [selectedPaymentMethod, setSelectedPaymentMethod] =
-    useState<string>("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>(
+    order.payment.method ?? ""
+  );
   const [timeLeft, setTimeLeft] = useState({
     hours: 5,
     minutes: 0,
     seconds: 0,
   });
+
+  useEffect(() => {
+    if (order.payment.method) {
+      setSelectedPaymentMethod(order.payment.method);
+    }
+  }, [order.payment.method]);
 
   // Countdown timer effect
   useEffect(() => {
@@ -41,10 +67,21 @@ export default function PaymentComponent({
 
   const formatTime = (value: number) => value.toString().padStart(2, "0");
 
+  const ticketItems = useMemo(() => {
+    return Array.from({ length: order.cart.quantity }).map((_, index) => ({
+      label: `Ticket ${index + 1}`,
+      description: `${order.cart.product ?? "Ticket"} x 1`,
+      image: index % 2 === 0 ? "/assets/images/order1.png" : "/assets/images/order2.png",
+    }));
+  }, [order.cart]);
+
+  const handleProceed = async () => {
+    if (!selectedPaymentMethod || loading) return;
+    await onProceedToConfirmation({ payment_method: selectedPaymentMethod });
+  };
+
   return (
     <div className="min-h-screen mt-40 bg-[#F5F5F5]">
-      {/* Header */}
-      
       {/* Main Content */}
       <div className="max-w-4xl mx-auto space-font px-4 sm:px-6 lg:px-8 py-8">
         {/* Order Received Card */}
@@ -63,35 +100,18 @@ export default function PaymentComponent({
           {/* Countdown Timer */}
           <div className="flex justify-center mb-8">
             <div className="flex space-x-8">
-              {/* Hours */}
-              <div className="flex flex-col items-center">
-                <div className="bg-[#E8E7E7] rounded-lg py-2 px-8 text-center min-w-[100px]">
-                  <div className="text-3xl font-bold text-gray-900">
-                    {formatTime(timeLeft.hours)}
+              {TIMER_SEGMENTS.map((segment) => (
+                <div className="flex flex-col items-center" key={segment}>
+                  <div className="bg-[#E8E7E7] rounded-lg py-2 px-8 text-center min-w-[100px]">
+                    <div className="text-3xl font-bold text-gray-900">
+                      {formatTime(timeLeft[segment])}
+                    </div>
+                  </div>
+                  <div className="text-sm text-gray-600 mt-2">
+                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
                   </div>
                 </div>
-                <div className="text-sm text-gray-600 mt-2">Hours</div>
-              </div>
-
-              {/* Minutes */}
-              <div className="flex flex-col items-center">
-                <div className="bg-[#E8E7E7] rounded-lg py-2 px-8 text-center min-w-[100px]">
-                  <div className="text-3xl font-bold text-gray-900">
-                    {formatTime(timeLeft.minutes)}
-                  </div>
-                </div>
-                <div className="text-sm text-gray-600 mt-2">Minutes</div>
-              </div>
-
-              {/* Seconds */}
-              <div className="flex flex-col items-center">
-                <div className="bg-[#E8E7E7] rounded-lg py-2 px-8 text-center min-w-[100px]">
-                  <div className="text-3xl font-bold text-gray-900">
-                    {formatTime(timeLeft.seconds)}
-                  </div>
-                </div>
-                <div className="text-sm text-gray-600 mt-2">Seconds</div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -101,7 +121,9 @@ export default function PaymentComponent({
               <span className="text-gray-600 font-medium">Order Number</span>
             </div>
             <div className="flex items-center justify-center py-3">
-              <span className="text-gray-900 font-semibold">1234567890</span>
+              <span className="text-gray-900 font-semibold">
+                {order.reference}
+              </span>
             </div>
           </div>
 
@@ -111,41 +133,29 @@ export default function PaymentComponent({
               Tickets
             </h3>
             <div className="space-y-3">
-              {/* Ticket 1 */}
-              <div className="flex items-center space-x-4 p-3  rounded-lg">
-                <Image
-                  src="/assets/images/order1.png"
-                  alt="Race Car"
-                  width={40}
-                  height={30}
-                  className="rounded"
-                />
+              {ticketItems.map((ticket, index) => (
+                <div
+                  className="flex items-center space-x-4 p-3 rounded-lg"
+                  key={ticket.label}
+                >
+                  <Image
+                    src={ticket.image}
+                    alt={ticket.label}
+                    width={40}
+                    height={30}
+                    className="rounded"
+                  />
 
-                <div className="flex-1">
-                  <div className="font-medium text-gray-900">Ticket 1</div>
-                  <div className="text-sm text-gray-600">
-                    General Admission x 1
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-900">
+                      {ticket.label}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {ticket.description}
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Ticket 2 */}
-              <div className="flex items-center space-x-4 p-3  rounded-lg">
-                <Image
-                  src="/assets/images/order2.png"
-                  alt="Race Car"
-                  width={40}
-                  height={30}
-                  className="rounded"
-                />
-
-                <div className="flex-1">
-                  <div className="font-medium text-gray-900">Ticket 2</div>
-                  <div className="text-sm text-gray-600">
-                    General Admission x 1
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -156,68 +166,43 @@ export default function PaymentComponent({
             </h3>
 
             <div className="flex flex-wrap justify-start gap-3">
-              {/* Card Payment */}
-              <button
-                onClick={() => setSelectedPaymentMethod("card")}
-                className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
-                  selectedPaymentMethod === "card"
-                    ? "border-red-600 bg-red-50 text-red-600"
-                    : "border-gray-200 text-gray-700 hover:border-gray-300"
-                }`}
-              >
-                Card Payment
-              </button>
-
-              {/* Easypaisa */}
-              <button
-                onClick={() => setSelectedPaymentMethod("easypaisa")}
-                className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
-                  selectedPaymentMethod === "easypaisa"
-                    ? "border-red-600 bg-red-50 text-red-600"
-                    : "border-gray-200 text-gray-700 hover:border-gray-300"
-                }`}
-              >
-                Easypaisa
-              </button>
-
-              {/* JazzCash */}
-              <button
-                onClick={() => setSelectedPaymentMethod("jazzcash")}
-                className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
-                  selectedPaymentMethod === "jazzcash"
-                    ? "border-red-600 bg-red-50 text-red-600"
-                    : "border-gray-200 text-gray-700 hover:border-gray-300"
-                }`}
-              >
-                JazzCash
-              </button>
-
-              {/* Bank Transfer */}
-              <button
-                onClick={() => setSelectedPaymentMethod("bank")}
-                className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
-                  selectedPaymentMethod === "bank"
-                    ? "border-red-600 bg-red-50 text-red-600"
-                    : "border-gray-200 text-gray-700 hover:border-gray-300"
-                }`}
-              >
-                Bank Transfer
-              </button>
+              {PAYMENT_METHODS.map((method) => (
+                <button
+                  key={method.id}
+                  type="button"
+                  onClick={() => setSelectedPaymentMethod(method.id)}
+                  className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
+                    selectedPaymentMethod === method.id
+                      ? "border-red-600 bg-red-50 text-red-600"
+                      : "border-gray-200 text-gray-700 hover:border-gray-300"
+                  }`}
+                  disabled={loading}
+                >
+                  {method.label}
+                </button>
+              ))}
             </div>
           </div>
+
+          {error && (
+            <div className="bg-red-50 text-red-600 text-sm rounded-lg p-3 mb-6 text-center">
+              {error}
+            </div>
+          )}
 
           {/* Proceed Button */}
           <div className="flex justify-center mt-8">
             <button
-              onClick={onProceedToConfirmation}
-              disabled={!selectedPaymentMethod}
+              type="button"
+              onClick={handleProceed}
+              disabled={!selectedPaymentMethod || loading}
               className={`w-[60%] py-3 px-4 rounded-lg font-semibold text-lg transition-colors ${
-                selectedPaymentMethod
-                  ? "bg-gray-300 text-gray-500"
-                  : "bg-red-600 text-white hover:bg-red-700 cursor-not-allowed"
+                selectedPaymentMethod && !loading
+                  ? "bg-red-600 text-white hover:bg-red-700"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >
-              Proceed
+              {loading ? "Processing..." : "Proceed"}
             </button>
           </div>
         </div>

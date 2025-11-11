@@ -1,13 +1,70 @@
 "use client";
 
 import Image from "next/image";
+import type { CheckoutOrder } from "./types";
 
-export default function ConfirmationComponent() {
+interface ConfirmationComponentProps {
+  order: CheckoutOrder;
+}
+
+function formatCurrency(amount: number, currency: string) {
+  return `${currency} ${amount.toLocaleString()}`;
+}
+
+function formatDateTime(iso?: string | null) {
+  if (!iso) return "Not available";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return iso;
+  }
+  return date.toLocaleString();
+}
+
+export default function ConfirmationComponent({
+  order,
+}: ConfirmationComponentProps) {
+  const metadata = order.metadata ?? {};
+
+  const metadataString = (value: unknown, fallback: string) =>
+    typeof value === "string" && value.trim().length > 0 ? value : fallback;
+
+  const bookingReference = order.booking_reference ?? order.reference;
+  const currency = order.amounts.currency ?? "PKR";
+
+  const billing = order.billing;
+  const customerName = billing
+    ? `${billing.first_name ?? ""} ${billing.last_name ?? ""}`.trim() ||
+      order.customer.name ||
+      "Not provided"
+    : order.customer.name || "Not provided";
+  const contactPhone = billing?.phone ?? order.customer.phone ?? "Not provided";
+  const contactEmail = billing?.email ?? order.customer.email ?? "Not provided";
+  const emergencyPhone = billing?.emergency_phone ?? metadataString(metadata.emergency_phone, "Not provided");
+
+  const paymentDetails = order.payment.details;
+  const paymentMethod = order.payment.method
+    ? order.payment.method.replace(/_/g, " ").toUpperCase()
+    : "Not specified";
+  const transactionId = paymentDetails?.transaction_id ?? "Pending";
+  const paymentDate = formatDateTime(paymentDetails?.paid_at);
+
+  const eventDate = metadataString(metadata.event_date, "March 15, 2024");
+  const eventTime = metadataString(metadata.event_time, "2:00 PM");
+  const eventDuration = metadataString(metadata.duration, "60 minutes");
+  const participantsLabel = metadataString(
+    metadata.participants_label,
+    `${order.cart.quantity} Participant${order.cart.quantity > 1 ? "s" : ""}`
+  );
+  const venueName = metadataString(metadata.venue, "Vroom Racing Circuit");
+  const venueAddress = metadataString(
+    metadata.venue_address,
+    "GT Road, Near Kallar Kahar, Chakwal District, Punjab, Pakistan"
+  );
+
+  const subtotalLabel = `${order.cart.product} (${order.cart.quantity}x)`;
+
   return (
     <div className="min-h-screen mt-40 satoshi-font bg-white">
-      {/* Header */}
-     
-
       {/* Breadcrumb Navigation */}
       <div className="bg-white py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,7 +80,7 @@ export default function ConfirmationComponent() {
               <div className="flex-1 flex justify-center">
                 <img
                   src="/assets/images/green-circle.svg"
-                  alt="Vroom Logo"
+                  alt="Confirmation"
                   className="h-4 ml-1"
                 />
               </div>
@@ -36,13 +93,8 @@ export default function ConfirmationComponent() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Payment Successful Section */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-20 h-20   mb-6">
-            <Image
-              src="/assets/images/Vector.svg"
-              alt="Time Attack Car"
-              width={72}
-              height={72}
-            />
+          <div className="inline-flex items-center justify-center w-20 h-20 mb-6">
+            <Image src="/assets/images/Vector.svg" alt="Success" width={72} height={72} />
           </div>
           <h1 className="text-4xl font-bold button-font text-[#00C851] mb-4">
             Payment Successful!
@@ -52,7 +104,7 @@ export default function ConfirmationComponent() {
           </p>
           <div className="inline-block bg-[#E8F5E8] rounded-lg px-6 py-3">
             <span className="text-[#00C851] font-semibold">
-              Booking Reference: VRC-2024-15789
+              Booking Reference: {bookingReference}
             </span>
           </div>
         </div>
@@ -71,7 +123,7 @@ export default function ConfirmationComponent() {
               <div className="flex items-start space-x-4 mb-6">
                 <Image
                   src="/assets/images/Order5.png"
-                  alt="Time Attack Car"
+                  alt="Experience"
                   width={70}
                   height={50}
                   className="rounded"
@@ -79,28 +131,28 @@ export default function ConfirmationComponent() {
 
                 <div className="w-full">
                   <h3 className="font-semibold button-font text-gray-900">
-                    Time Attack VIP Package
+                    {order.cart.product} {order.cart.package ? `- ${order.cart.package}` : ""}
                   </h3>
 
                   <div className="mt-3 space-y-2 text-sm text-gray-600 w-full">
                     <div className="flex justify-between w-full">
                       <span className="w-1/2 text-gray-700">Date & Time:</span>
                       <span className="w-1/2 text-right text-gray-800 font-medium">
-                        March 15, 2024 - 2:00 PM
+                        {eventDate} - {eventTime}
                       </span>
                     </div>
 
                     <div className="flex justify-between w-full">
                       <span className="w-1/2 text-gray-700">Duration:</span>
                       <span className="w-1/2 text-right text-gray-800 font-medium">
-                        60 minutes
+                        {eventDuration}
                       </span>
                     </div>
 
                     <div className="flex justify-between w-full">
                       <span className="w-1/2 text-gray-700">Participants:</span>
                       <span className="w-1/2 text-right text-gray-800 font-medium">
-                        2 Adults
+                        {participantsLabel}
                       </span>
                     </div>
                   </div>
@@ -109,59 +161,35 @@ export default function ConfirmationComponent() {
 
               {/* Participant Information */}
               <div className="mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">
-                  Participant Information
-                </h3>
+                <h3 className="font-semibold text-gray-900 mb-3">Participant Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-[#F5F5F5] text-sm rounded-lg">
-                  {/* Column 1 */}
                   <div>
-                    <p className="text-gray-600 font-medium">
-                      Primary Participant:
-                    </p>
-                    <p className="text-gray-900">John Anderson</p>
+                    <p className="text-gray-600 font-medium">Primary Participant:</p>
+                    <p className="text-gray-900">{customerName}</p>
                   </div>
-
-                  {/* Column 2 */}
                   <div>
                     <p className="text-gray-600 font-medium">Contact:</p>
-                    <p className="text-gray-900">+92 300 1234567</p>
+                    <p className="text-gray-900">{contactPhone}</p>
                   </div>
-
-                  {/* Column 3 */}
                   <div>
                     <p className="text-gray-600 font-medium">Email:</p>
-                    <p className="text-gray-900">john.anderson@email.com</p>
+                    <p className="text-gray-900">{contactEmail}</p>
                   </div>
-
-                  {/* Column 4 */}
                   <div>
-                    <p className="text-gray-600 font-medium">
-                      Emergency Contact:
-                    </p>
-                    <p className="text-gray-900">+92 300 7664321</p>
+                    <p className="text-gray-600 font-medium">Emergency Contact:</p>
+                    <p className="text-gray-900">{emergencyPhone}</p>
                   </div>
                 </div>
               </div>
 
               {/* Venue Address */}
               <div className="mb-6 p-2 bg-[#F5F5F5]">
-                <h3 className="font-semibold text-gray-900 mb-3">
-                  Venue Address
-                </h3>
+                <h3 className="font-semibold text-gray-900 mb-3">Venue Address</h3>
                 <div className="text-sm text-gray-600">
-                  <div className="font-medium text-gray-900 mb-1">
-                    Vroom Racing Circuit
-                  </div>
-                  <div className="mb-2">
-                    GT Road, Near Kallar Kahar, Chakwal District, Punjab,
-                    Pakistan
-                  </div>
+                  <div className="font-medium text-gray-900 mb-1">{venueName}</div>
+                  <div className="mb-2">{venueAddress}</div>
                   <button className="flex items-center text-red-600 hover:text-red-700">
-                    <svg
-                      className="w-4 h-4 mr-1"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
+                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
                         d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
@@ -175,24 +203,11 @@ export default function ConfirmationComponent() {
 
               {/* What to Bring */}
               <div>
-                <h3 className="font-semibold text-gray-900 mb-3">
-                  What to Bring
-                </h3>
+                <h3 className="font-semibold text-gray-900 mb-3">What to Bring</h3>
                 <div className="grid grid-cols-1 p-4 bg-[#F5F5F5] sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
-                  {[
-                    "Valid CNIC or Passport",
-                    "Long pants recommended",
-                    "Closed-toe shoes",
-                    "Confirmation email",
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center">
-                      <Image
-                        src="/assets/images/green-circle.svg"
-                        alt="Time Attack Car"
-                        width={20}
-                        height={20}
-                        className="rounded"
-                      />
+                  {["Valid CNIC or Passport", "Long pants recommended", "Closed-toe shoes", "Confirmation email"].map((item) => (
+                    <div key={item} className="flex items-center">
+                      <Image src="/assets/images/green-circle.svg" alt="Checklist" width={20} height={20} />
                       <span className="text-gray-700 ml-2">{item}</span>
                     </div>
                   ))}
@@ -206,20 +221,24 @@ export default function ConfirmationComponent() {
                 Payment Receipt
               </h2>
 
-              <div className="space-y-3 mb-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">
-                    Time Attack VIP Package (1x)
+              <div className="space-y-3 mb-4 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">{subtotalLabel}</span>
+                  <span className="text-gray-900">
+                    {formatCurrency(order.amounts.subtotal, currency)}
                   </span>
-                  <span className="text-gray-900">PKR 12,000</span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between">
                   <span className="text-gray-600">Service Fee</span>
-                  <span className="text-gray-900">PKR 500</span>
+                  <span className="text-gray-900">
+                    {formatCurrency(order.amounts.service_fee, currency)}
+                  </span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between">
                   <span className="text-gray-600">GST (17%)</span>
-                  <span className="text-gray-900">PKR 2,125</span>
+                  <span className="text-gray-900">
+                    {formatCurrency(order.amounts.tax, currency)}
+                  </span>
                 </div>
               </div>
 
@@ -229,26 +248,23 @@ export default function ConfirmationComponent() {
                     Total Paid
                   </span>
                   <span className="text-2xl button-font font-bold text-green-600">
-                    PKR 14,625
+                    {formatCurrency(order.amounts.total, currency)}
                   </span>
                 </div>
               </div>
 
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-gray-700">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">
-                    Payment Method: **** **** 3456
-                  </span>
+                  <span>Payment Method:</span>
+                  <span>{paymentMethod}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">
-                    Transaction ID: TXN-2024-15789-VRC
-                  </span>
+                  <span>Transaction ID:</span>
+                  <span>{transactionId}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">
-                    Payment Date: March 10, 2024 at 3:45 PM
-                  </span>
+                  <span>Payment Date:</span>
+                  <span>{paymentDate}</span>
                 </div>
               </div>
             </div>
@@ -263,32 +279,15 @@ export default function ConfirmationComponent() {
               </h2>
               <div className="space-y-3">
                 <button className="w-full bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center">
-                  <Image
-                    src="/assets/images/download.svg"
-                    alt="Time Attack Car"
-                    width={24}
-                    height={24}
-                    className="rounded"
-                  />
+                  <Image src="/assets/images/download.svg" alt="Download" width={24} height={24} />
                   Download Receipt
                 </button>
                 <button className="w-full bg-white border border-red-600 text-red-600 py-3 px-4 rounded-lg hover:bg-red-50 transition-colors flex items-center justify-center">
-                  <Image
-                    src="/assets/images/calendar.svg"
-                    alt="Time Attack Car"
-                    width={24}
-                    height={24}
-                    className="rounded"
-                  />
+                  <Image src="/assets/images/calendar.svg" alt="Calendar" width={24} height={24} />
                   Add to Calendar
                 </button>
                 <button className="w-full border bg-white border-red-600 text-red-600 py-3 px-4 rounded-lg hover:bg-red-50 transition-colors flex items-center justify-center">
-                  <svg
-                    className="w-5 h-5 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -356,37 +355,19 @@ export default function ConfirmationComponent() {
               </h2>
               <div className="space-y-3">
                 <div>
-                  <div className="font-semibold text-gray-900 mb-1">
-                    Call Support
-                  </div>
-                  <div className="text-[#000000B2] font-medium">
-                    +92 300 VROOM-DI
-                  </div>
+                  <div className="font-semibold text-gray-900 mb-1">Call Support</div>
+                  <div className="text-[#000000B2] font-medium">+92 300 VROOM-DI</div>
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900 mb-1">
-                    Email Support
-                  </div>
-                  <div className="text-[#000000B2] font-medium">
-                    support@vroomracing.pk
-                  </div>
+                  <div className="font-semibold text-gray-900 mb-1">Email Support</div>
+                  <div className="text-[#000000B2] font-medium">support@vroomracing.pk</div>
                 </div>
                 <div className="pt-3 border-t border-gray-200">
                   <div className="flex items-center text-sm">
-                    <Image
-                      src="/assets/images/times.svg"
-                      alt="Time Attack Car"
-                      width={24}
-                      height={24}
-                      className="rounded"
-                    />
-                    <span className="font-semibold text-gray-900">
-                      Modify Booking
-                    </span>
+                    <Image src="/assets/images/times.svg" alt="Modify" width={24} height={24} />
+                    <span className="font-semibold text-gray-900 ml-2">Modify Booking</span>
                   </div>
-                  <div className="text-sm text-[#000000B2] mt-1">
-                    Up to 24 hours before
-                  </div>
+                  <div className="text-sm text-[#000000B2] mt-1">Up to 24 hours before</div>
                 </div>
               </div>
             </div>

@@ -1,7 +1,36 @@
 'use client'
 import Image from 'next/image'
+import { useState } from 'react'
+import { postJson } from '@/lib/api'
 
 export default function RegistrationForm() {
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [successId, setSuccessId] = useState<number | null>(null)
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (submitting) return
+    setSubmitting(true)
+    setError(null)
+    setSuccessId(null)
+    const fd = new FormData(e.currentTarget)
+    const payload: Record<string, any> = {}
+    fd.forEach((v, k) => { payload[k] = v })
+    try {
+      const resp = await postJson<{ success: boolean; id: number }>('/experience-registrations', {
+        form_type: 'time-attack',
+        payload,
+      })
+      setSuccessId(resp.id)
+      e.currentTarget.reset()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to submit')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#F5F5F5] py-12 px-4">
       <div className="max-w-4xl mx-auto">
@@ -17,7 +46,9 @@ export default function RegistrationForm() {
 
         {/* Form Container */}
         <div className="bg-white rounded-lg shadow-sm p-8 md:p-12">
-          <form>
+          {successId && <div className="mb-4 rounded-md border border-green-200 bg-green-50 p-4 text-green-800">Submitted. Reference: {successId}</div>}
+          {error && <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-4 text-red-800">{error}</div>}
+          <form onSubmit={handleSubmit}>
             {/* Row 1: Full Name and Phone Number */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               {/* Full Name */}
@@ -33,6 +64,7 @@ export default function RegistrationForm() {
                 </label>
                 <input
                   type="text"
+                  name="full_name"
                   placeholder="Enter your full name"
                   className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg bg-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
@@ -46,6 +78,7 @@ export default function RegistrationForm() {
                 </label>
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="+92 XXX XXXXXXXX"
                   className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
@@ -68,6 +101,7 @@ export default function RegistrationForm() {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="your@email.com"
                   className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
@@ -87,6 +121,7 @@ export default function RegistrationForm() {
                 </label>
                 <input
                   type="tel"
+                  name="emergency_contact"
                   placeholder="+92 XXX XXXXXXXX"
                   className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
@@ -109,6 +144,7 @@ export default function RegistrationForm() {
                 </label>
                 <div className="relative">
                   <select
+                    name="experience_level"
                     className="w-full px-4 py-3 border border-gray-300 bg-[#F5F5F5] button-font rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
                     required
                   >
@@ -145,6 +181,7 @@ export default function RegistrationForm() {
                 </label>
                 <div className="relative">
                   <select
+                    name="car_type"
                     className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
                     required
                   >
@@ -184,6 +221,7 @@ export default function RegistrationForm() {
                 </label>
                 <div className="relative">
                   <select
+                    name="session_preference"
                     className="w-full px-4 py-3 button-font border bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
                     required
                   >
@@ -219,6 +257,7 @@ export default function RegistrationForm() {
                 </label>
                 <input
                   type="date"
+                  name="preferred_date"
                   placeholder="mm/dd/yyyy"
                   className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
@@ -230,9 +269,10 @@ export default function RegistrationForm() {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-red-600 cursor-pointer hover:bg-red-700 button-font text-white font-semibold py-3 px-8 rounded-lg transition-colors flex items-center gap-2"
+                className="bg-red-600 cursor-pointer hover:bg-red-700 button-font text-white font-semibold py-3 px-8 rounded-lg transition-colors flex items-center gap-2 disabled:opacity-60"
+                disabled={submitting}
               >
-                Complete Registration
+                {submitting ? 'Submitting...' : 'Complete Registration'}
                 <Image
                   src="/assets/images/arrow.svg"
                   alt="arrow"

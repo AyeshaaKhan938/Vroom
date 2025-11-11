@@ -37,49 +37,12 @@ export default function VroomEvents() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const heroHeight = window.innerHeight * 0.8; // Hero section is 80vh
-      const scrollThreshold = heroHeight; // Show when past hero section
-      
-      // Show events header when scrolled past hero section
-      // Hide when scrolling back up to hero section
-      if (currentScrollY > scrollThreshold) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
 
-    // Initial check
-    handleScroll();
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#F5F5F5] px-6 pb-12">
+    <section  className="w-full bg-[#F5F5F5] px-6 pb-12">
       {/* Sticky Header - Only visible when scrolled down, replaces main header */}
-      <header 
-        className={`fixed top-16 left-0 right-0 z-[60] bg-[#F5F5F5] text-black transition-transform duration-300 ${
-          isVisible ? 'translate-y-0' : '-translate-y-full opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-2 sm:px-4 py-3">
-          <button className="p-2 cursor-pointer" onClick={() => openModal('menu')}>
-            <img
-              src="/assets/images/hamburger-black.svg"
-              alt="Menu"
-              className="w-24 h-24 md:w-24 md:h-24"
-            />
-          </button>
-          <button className="text-base md:text-lg tracking-normal cursor-pointer" onClick={() => openModal('leaderboard')}>Leaderboard</button>
-        </div>
-      </header>
+ 
 
       {/* Section Heading */}
       <div className="max-w-7xl pt-24 mx-auto mb-6">

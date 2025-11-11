@@ -2,8 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { postJson } from "@/lib/api";
 
 export default function EventInquiryForm() {
+  const router = useRouter();
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
+
   const [formData, setFormData] = useState({
     eventType: "Corporate Event",
     expectedParticipants: "",
@@ -28,10 +35,45 @@ export default function EventInquiryForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const renderError = (name: string) => {
+    const msgs = fieldErrors?.[name];
+    if (!msgs?.length) return null;
+    return <p className="text-xs text-red-600 mt-1">{msgs[0]}</p>;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission here
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+    setFieldErrors({});
+    try {
+      const payload = {
+        ...formData,
+        expectedParticipants: Number(formData.expectedParticipants || 0),
+      };
+      const resp = await postJson<{ success: boolean; id: number }>(
+        "/event-inquiries",
+        payload
+      );
+      // Redirect to confirmation with id, or show inline success
+      router.push(`/host-event-confirmation?inquiry=${resp.id}`);
+    } catch (err: any) {
+      if (err?.status === 422 && err?.body?.errors) {
+        setFieldErrors(err.body.errors);
+        const first = Object.keys(err.body.errors)[0];
+        if (first) {
+          const el = (e.target as HTMLFormElement).querySelector(
+            `[name="${first}"]`
+          ) as HTMLElement | null;
+          el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      } else {
+        setError(err?.message || "Failed to submit inquiry");
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -52,6 +94,7 @@ export default function EventInquiryForm() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
+          {error && <div className="text-red-600 text-sm">{error}</div>}
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left Column */}
@@ -74,6 +117,7 @@ export default function EventInquiryForm() {
                   <option value="Wedding Party">Wedding Party</option>
                   <option value="Private Event">Private Event</option>
                 </select>
+                {renderError('eventType')}
               </div>
 
               {/* Expected Participants */}
@@ -90,6 +134,7 @@ export default function EventInquiryForm() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
+                {renderError('expectedParticipants')}
               </div>
 
               {/* Contact Person */}
@@ -106,6 +151,7 @@ export default function EventInquiryForm() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
+                {renderError('contactPerson')}
               </div>
 
               {/* Phone */}
@@ -122,6 +168,7 @@ export default function EventInquiryForm() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
+                {renderError('phone')}
               </div>
             </div>
 
@@ -142,11 +189,10 @@ export default function EventInquiryForm() {
                     required
                   />
                   <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
+                   
                   </div>
                 </div>
+                {renderError('preferredDate')}
               </div>
 
               {/* Budget Range */}
@@ -166,6 +212,7 @@ export default function EventInquiryForm() {
                   <option value="$5,000 - $10,000">$5,000 - $10,000</option>
                   <option value="$10,000+">$10,000+</option>
                 </select>
+                {renderError('budgetRange')}
               </div>
 
               {/* Company/Organization */}
@@ -181,6 +228,7 @@ export default function EventInquiryForm() {
                   placeholder="Company name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
+                {renderError('company')}
               </div>
 
               {/* Email */}
@@ -197,6 +245,7 @@ export default function EventInquiryForm() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
+                {renderError('email')}
               </div>
             </div>
           </div>
@@ -217,6 +266,7 @@ export default function EventInquiryForm() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                 required
               />
+              {renderError('eventDescription')}
             </div>
 
     {/* Special Requirements + Catering Needs */}
@@ -234,6 +284,7 @@ export default function EventInquiryForm() {
       rows={3}
       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
     />
+    {renderError('specialRequirements')}
   </div>
 
   {/* Catering Needs */}
@@ -252,6 +303,7 @@ export default function EventInquiryForm() {
       <option value="Full meal service">Full meal service</option>
       <option value="Custom catering">Custom catering</option>
     </select>
+    {renderError('cateringNeeds')}
   </div>
 </div>
 
@@ -261,9 +313,10 @@ export default function EventInquiryForm() {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-red-600 cursor-pointer text-white px-8 py-4 rounded-lg text-lg bg-[#f5f5f5] font-semibold hover:bg-red-700 transition-colors"
+              className="bg-red-600 cursor-pointer text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors disabled:opacity-60"
+              disabled={submitting}
             >
-              Submit Event Inquiry
+              {submitting ? 'Submitting...' : 'Submit Event Inquiry'}
             </button>
           </div>
 

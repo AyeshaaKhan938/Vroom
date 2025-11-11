@@ -1,6 +1,35 @@
+'use client'
 import Image from 'next/image';
+import { useState } from 'react';
+import { postJson } from '@/lib/api';
 
 export default function CorporateRegistrationForm() {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successId, setSuccessId] = useState<number | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+    setSuccessId(null);
+    const fd = new FormData(e.currentTarget);
+    const payload: Record<string, any> = {};
+    fd.forEach((v, k) => { payload[k] = v; });
+    try {
+      const resp = await postJson<{ success: boolean; id: number }>('/experience-registrations', {
+        form_type: 'corporate',
+        payload,
+      });
+      setSuccessId(resp.id);
+      e.currentTarget.reset();
+    } catch (err: any) {
+      setError(err?.message || 'Failed to submit');
+    } finally {
+      setSubmitting(false);
+    }
+  }
   return (
     <div className="min-h-screen bg-[#F5F5F5] py-12 px-4">
       <div className="max-w-3xl mx-auto">
@@ -16,7 +45,9 @@ export default function CorporateRegistrationForm() {
 
         {/* Form Container */}
         <div className="bg-white rounded-lg shadow-sm p-8 md:p-12 mb-8">
-          <form>
+          {successId && <div className="mb-4 rounded-md border border-green-200 bg-green-50 p-4 text-green-800">Submitted. Reference: {successId}</div>}
+          {error && <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-4 text-red-800">{error}</div>}
+          <form onSubmit={handleSubmit}>
             {/* Row 1: Company Name and Contact Person */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               {/* Company Name */}
@@ -26,6 +57,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <input
                   type="text"
+                  name="company_name"
                   placeholder="Enter company name"
                   className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
@@ -39,6 +71,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <input
                   type="text"
+                  name="contact_person"
                   placeholder="Full name"
                   className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
@@ -55,6 +88,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <input
                   type="text"
+                  name="title"
                   placeholder="Job title"
                   className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
@@ -68,6 +102,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="+92 300 1234567"
                   className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
@@ -82,6 +117,7 @@ export default function CorporateRegistrationForm() {
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="contact@company.com"
                 className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                 required
@@ -97,6 +133,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <input
                   type="date"
+                  name="preferred_event_date"
                   placeholder="mm/dd/yyyy"
                   className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
@@ -109,6 +146,7 @@ export default function CorporateRegistrationForm() {
                   Expected Attendees <span className="text-gray-900">*</span>
                 </label>
                 <select
+                  name="expected_attendees"
                   className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   required
                 >
@@ -129,6 +167,7 @@ export default function CorporateRegistrationForm() {
                   Package Interest <span className="text-gray-900">*</span>
                 </label>
                 <select
+                  name="package_interest"
                   className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   required
                 >
@@ -146,6 +185,7 @@ export default function CorporateRegistrationForm() {
                   Budget Range
                 </label>
                 <select
+                  name="budget_range"
                   className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                 >
                   <option value="">Select budget range</option>
@@ -166,6 +206,7 @@ export default function CorporateRegistrationForm() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="catering_light_refreshments"
                     className="w-4 h-4 text-red-600 button-font border-gray-300 rounded focus:ring-red-600"
                   />
                   <span className="text-base button-font text-gray-700">Light Refreshments</span>
@@ -173,6 +214,7 @@ export default function CorporateRegistrationForm() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="catering_full_meal"
                     className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-600"
                   />
                   <span className="text-base button-font text-gray-700">Full Meal Service</span>
@@ -180,6 +222,7 @@ export default function CorporateRegistrationForm() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="catering_dietary"
                     className="w-4 h-4 text-red-600 button-font border-gray-300 rounded focus:ring-red-600"
                   />
                   <span className="text-base button-font text-gray-700">Dietary Restrictions</span>
@@ -193,6 +236,7 @@ export default function CorporateRegistrationForm() {
                 Special Requests
               </label>
               <textarea
+                name="special_requests"
                 rows={4}
                 placeholder="Any specific requirements, themes, or objectives for your corporate event..."
                 className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
@@ -201,9 +245,10 @@ export default function CorporateRegistrationForm() {
              <div className="flex justify-center">
           <button
             type="submit"
-            className="bg-red-600 cursor-pointer button-font hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg"
+            className="bg-red-600 cursor-pointer button-font hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg disabled:opacity-60"
+            disabled={submitting}
           >
-            Request Corporate Proposal
+            {submitting ? 'Submitting...' : 'Request Corporate Proposal'}
             <Image
               src="/assets/images/arrow.svg"
               alt="arrow"

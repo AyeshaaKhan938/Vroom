@@ -1,6 +1,36 @@
+'use client'
 import Image from 'next/image';
+import { useState } from 'react';
+import { postJson } from '@/lib/api';
 
 export default function TestingRegistrationForm() {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successId, setSuccessId] = useState<number | null>(null);
+  const [insuranceFileName, setInsuranceFileName] = useState<string>('');
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+    setSuccessId(null);
+    const fd = new FormData(e.currentTarget);
+    const payload: Record<string, any> = {};
+    fd.forEach((v, k) => { payload[k] = v; });
+    try {
+      const resp = await postJson<{ success: boolean; id: number }>('/experience-registrations', {
+        form_type: 'testing',
+        payload,
+      });
+      setSuccessId(resp.id);
+      e.currentTarget.reset();
+    } catch (err: any) {
+      setError(err?.message || 'Failed to submit');
+    } finally {
+      setSubmitting(false);
+    }
+  }
   return (
     <div className="min-h-screen bg-[#F5F5F5] py-12 px-4">
       <div className="max-w-2xl mx-auto">
@@ -16,7 +46,9 @@ export default function TestingRegistrationForm() {
 
         {/* Form Container */}
         <div className="bg-white rounded-lg shadow-sm p-8">
-          <form>
+          {successId && <div className="mb-4 rounded-md border border-green-200 bg-green-50 p-4 text-green-800">Submitted. Reference: {successId}</div>}
+          {error && <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-4 text-red-800">{error}</div>}
+          <form onSubmit={handleSubmit}>
             {/* Applicant Type */}
             <div className="mb-6">
               <label className="block text-base button-font font-semibold text-gray-900 mb-3">
@@ -53,6 +85,7 @@ export default function TestingRegistrationForm() {
                 </label>
                 <input
                   type="text"
+                  name="contact_person"
                   placeholder="Full Name"
                   className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                 />
@@ -63,6 +96,7 @@ export default function TestingRegistrationForm() {
                 </label>
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="+92 300 1234567"
                   className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                 />
@@ -76,6 +110,7 @@ export default function TestingRegistrationForm() {
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="your.email@example.com"
                 className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
               />
@@ -93,6 +128,7 @@ export default function TestingRegistrationForm() {
                   </label>
                   <input
                     type="text"
+                    name="vehicle_make"
                     placeholder="Toyota"
                     className="w-full px-4 py-2 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                   />
@@ -103,6 +139,7 @@ export default function TestingRegistrationForm() {
                   </label>
                   <input
                     type="text"
+                    name="vehicle_model"
                     placeholder="Supra"
                     className="w-full px-4 py-2 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                   />
@@ -113,6 +150,7 @@ export default function TestingRegistrationForm() {
                   </label>
                   <input
                     type="text"
+                    name="vehicle_year"
                     placeholder="2024"
                     className="w-full px-4 py-2 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                   />
@@ -127,6 +165,7 @@ export default function TestingRegistrationForm() {
               </label>
               <select
                 className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-gray-50"
+                name="testing_purpose"
               >
                 <option value="">Performance Testing</option>
                 <option value="durability">Durability Testing</option>
@@ -144,6 +183,7 @@ export default function TestingRegistrationForm() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="equip_timing"
                     className="w-4 h-4 text-red-600 button-font border-gray-300 rounded focus:ring-red-600"
                   />
                   <span className="text-base button-font text-gray-700">Timing System</span>
@@ -151,6 +191,7 @@ export default function TestingRegistrationForm() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="equip_datalogging"
                     className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-600"
                   />
                   <span className="text-base button-font text-gray-700">Data Logging</span>
@@ -158,6 +199,7 @@ export default function TestingRegistrationForm() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="equip_tirewarming"
                     className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-600"
                   />
                   <span className="text-base button-font text-gray-700">Tire Warming</span>
@@ -165,6 +207,7 @@ export default function TestingRegistrationForm() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="equip_techsupport"
                     className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-600"
                   />
                   <span className="text-base button-font text-gray-700">Technical Support</span>
@@ -177,19 +220,29 @@ export default function TestingRegistrationForm() {
               <label className="block text-base button-font font-semibold text-gray-900 mb-2">
                 Insurance Certificate
               </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-red-600 transition-colors cursor-pointer">
-                <div className="flex flex-col items-center gap-2">
+              <label className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-red-600 transition-colors cursor-pointer block">
+                <input
+                  type="file"
+                  name="insurance_certificate"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  className="hidden"
+                  onChange={(e) => setInsuranceFileName(e.target.files?.[0]?.name || '')}
+                />
+                <div className="flex flex-col items-center gap-2 pointer-events-none">
                   <div className="text-red-600">
-                     <img
-              src="/assets/images/browse.svg"
-              alt="Menu"
-              className="w-24 h-24 md:w-24 md:h-24"
-            />
+                    <img
+                      src="/assets/images/browse.svg"
+                      alt="Browse"
+                      className="w-24 h-24 md:w-24 md:h-24"
+                    />
                   </div>
                   <p className="text-base button-font text-gray-700">Upload your insurance certificate</p>
                   <p className="text-sm button-font text-red-600">Browse Files</p>
+                  {insuranceFileName && (
+                    <p className="text-xs text-gray-700 mt-1">Selected: {insuranceFileName}</p>
+                  )}
                 </div>
-              </div>
+              </label>
             </div>
 
             {/* Technical Requirements */}
@@ -199,6 +252,7 @@ export default function TestingRegistrationForm() {
               </label>
               <textarea
                 rows={3}
+                name="technical_requirements"
                 placeholder="Describe any specific technical requirements or equipment needs for your testing session..."
                 className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50 resize-none"
               ></textarea>
@@ -212,6 +266,7 @@ export default function TestingRegistrationForm() {
                 </label>
                 <input
                   type="date"
+                  name="preferred_start_date"
                   placeholder="mm/dd/yyyy"
                   className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                 />
@@ -222,6 +277,7 @@ export default function TestingRegistrationForm() {
                 </label>
                 <select
                   className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-gray-50"
+                  name="duration"
                 >
                   <option value="">Half Day (4 hours)</option>
                   <option value="full">Full Day (8 hours)</option>
@@ -233,9 +289,10 @@ export default function TestingRegistrationForm() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full cursor-pointer bg-red-600 button-font hover:bg-red-700 text-white font-semibold py-4 rounded-lg transition-colors"
+              className="w-full cursor-pointer bg-red-600 button-font hover:bg-red-700 text-white font-semibold py-4 rounded-lg transition-colors disabled:opacity-60"
+              disabled={submitting}
             >
-              Book Testing Session
+              {submitting ? 'Submitting...' : 'Book Testing Session'}
             </button>
           </form>
         </div>

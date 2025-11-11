@@ -1,29 +1,69 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import type {
+  CartPayload,
+  CheckoutOrder,
+  PricingConfig,
+} from "./types";
 
 interface CartComponentProps {
-  onContinueToBilling: () => void;
+  pricing: PricingConfig;
+  order?: CheckoutOrder | null;
+  onContinueToBilling: (payload: CartPayload) => Promise<void>;
   onBackToExperiences: () => void;
+  loading: boolean;
+  error?: string | null;
 }
 
 export default function CartComponent({
+  pricing,
+  order,
   onContinueToBilling,
   onBackToExperiences,
+  loading,
+  error,
 }: CartComponentProps) {
-  const [quantity, setQuantity] = useState(1);
-  const [promoCode, setPromoCode] = useState("");
+  const [quantity, setQuantity] = useState<number>(
+    order?.cart?.quantity ?? 1
+  );
+  const [promoCode, setPromoCode] = useState(order?.cart?.promo_code ?? "");
 
-  const subtotal = 12000;
-  const serviceFee = 500;
-  const gst = 2125;
-  const total = subtotal + serviceFee + gst;
+  useEffect(() => {
+    if (order?.cart) {
+      setQuantity(order.cart.quantity ?? 1);
+      setPromoCode(order.cart.promo_code ?? "");
+    }
+  }, [order]);
+
+  const pricingSummary = useMemo(() => {
+    const subtotal = pricing.unitPrice * quantity;
+    const serviceFee = pricing.serviceFee;
+    const gstRaw = (subtotal + serviceFee) * pricing.gstRate;
+    const gst = Number(gstRaw.toFixed(2));
+    const total = Number((subtotal + serviceFee + gst).toFixed(2));
+    return { subtotal, serviceFee, gst, total };
+  }, [pricing, quantity]);
+
+  const amounts = order?.amounts ?? {
+    subtotal: pricingSummary.subtotal,
+    service_fee: pricingSummary.serviceFee,
+    tax: pricingSummary.gst,
+    total: pricingSummary.total,
+    currency: "PKR",
+  };
+
+  const handleContinue = async () => {
+    if (loading) return;
+    await onContinueToBilling({
+      quantity,
+      promoCode: promoCode ? promoCode.trim() : undefined,
+    });
+  };
 
   return (
     <div className="min-h-screen mt-40 bg-white">
-      {/* Header */}
-     
       {/* Breadcrumb Navigation */}
       <div className="bg-[#F5F5F5] satoshi-font py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,7 +112,7 @@ export default function CartComponent({
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h3 className="text-xl font-bold button-font text-gray-900 mb-2">
-                        Time Attack
+                        {pricing.product}
                       </h3>
                       <div className="flex items-center mb-4">
                         <img
@@ -81,34 +121,18 @@ export default function CartComponent({
                           className="h-1 mr-2"
                         />
                         <span className="text-gray-700 satoshi-font">
-                          VIP Package
+                          {pricing.package}
                         </span>
                       </div>
                     </div>
-                    <button className="text-gray-400 hover:text-gray-600">
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
+                    
                   </div>
 
                   {/* Details Grid */}
                   <div className="grid grid-cols-2 satoshi-font gap-4 mb-4">
                     <div>
                       <div className="text-sm text-gray-600">Date & Time</div>
-                      <div className="text-gray-900">
-                        March 15, 2024 at 2:00 PM
-                      </div>
+                      <div className="text-gray-900">March 15, 2024 at 2:00 PM</div>
                     </div>
                     <div>
                       <div className="text-sm text-gray-600">Duration</div>
@@ -132,6 +156,7 @@ export default function CartComponent({
                         <button
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
                           className="px-3 py-2 text-gray-600 hover:text-gray-800"
+                          disabled={loading}
                         >
                           -
                         </button>
@@ -141,13 +166,14 @@ export default function CartComponent({
                         <button
                           onClick={() => setQuantity(quantity + 1)}
                           className="px-3 py-2 text-gray-600 hover:text-gray-800"
+                          disabled={loading}
                         >
                           +
                         </button>
                       </div>
                     </div>
                     <div className="text-2xl font-bold satoshi-font text-red-600">
-                      PKR {subtotal.toLocaleString()}
+                      PKR {pricingSummary.subtotal.toLocaleString()}
                     </div>
                   </div>
                 </div>
@@ -160,50 +186,22 @@ export default function CartComponent({
                 VIP Package Includes:
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="flex items-center">
-                  <Image
-                    src="/assets/images/green-circle.svg"
-                    alt="Time Attack Car"
-                    width={22}
-                    height={22}
-                  />
-                  <span className="text-gray-700 satoshi-font ml-2">
-                    Professional timing equipment
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <Image
-                    src="/assets/images/green-circle.svg"
-                    alt="Time Attack Car"
-                    width={22}
-                    height={22}
-                  />
-                  <span className="text-gray-700 satoshi-font ml-2">
-                    Personal race instructor
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <Image
-                    src="/assets/images/green-circle.svg"
-                    alt="Time Attack Car"
-                    width={22}
-                    height={22}
-                  />
-                  <span className="text-gray-700 satoshi-font ml-2">
-                    Professional photography
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <Image
-                    src="/assets/images/green-circle.svg"
-                    alt="Time Attack Car"
-                    width={22}
-                    height={22}
-                  />
-                  <span className="text-gray-700 satoshi-font ml-2">
-                    Complimentary refreshments
-                  </span>
-                </div>
+                {[
+                  "Professional timing equipment",
+                  "Personal race instructor",
+                  "Professional photography",
+                  "Complimentary refreshments",
+                ].map((item) => (
+                  <div className="flex items-center" key={item}>
+                    <Image
+                      src="/assets/images/green-circle.svg"
+                      alt="Check"
+                      width={22}
+                      height={22}
+                    />
+                    <span className="text-gray-700 satoshi-font ml-2">{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -219,8 +217,13 @@ export default function CartComponent({
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                   className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  disabled={loading}
                 />
-                <button className="bg-red-600 satoshi-font text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                <button
+                  type="button"
+                  className="bg-red-600 satoshi-font text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-60"
+                  disabled
+                >
                   Apply
                 </button>
               </div>
@@ -237,16 +240,22 @@ export default function CartComponent({
               {/* Cost Breakdown */}
               <div className="space-y-3 mb-6 satoshi-font">
                 <div className="flex justify-between text-gray-700">
-                  <span>Subtotal (1 item)</span>
-                  <span>PKR {subtotal.toLocaleString()}</span>
+                  <span>Subtotal ({quantity} item{quantity > 1 ? "s" : ""})</span>
+                  <span>
+                    {amounts.currency} {amounts.subtotal.toLocaleString()}
+                  </span>
                 </div>
                 <div className="flex justify-between text-gray-700">
                   <span>Service Fee</span>
-                  <span>PKR {serviceFee.toLocaleString()}</span>
+                  <span>
+                    {amounts.currency} {amounts.service_fee.toLocaleString()}
+                  </span>
                 </div>
                 <div className="flex justify-between text-gray-700">
                   <span>GST (17%)</span>
-                  <span>PKR {gst.toLocaleString()}</span>
+                  <span>
+                    {amounts.currency} {amounts.tax.toLocaleString()}
+                  </span>
                 </div>
               </div>
 
@@ -255,34 +264,48 @@ export default function CartComponent({
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold button-font text-gray-900">Total</span>
                   <span className="text-2xl satoshi-font font-bold text-red-600">
-                    PKR {total.toLocaleString()}
+                    {amounts.currency} {amounts.total.toLocaleString()}
                   </span>
                 </div>
               </div>
 
+              {error && (
+                <div className="bg-red-50 text-red-600 text-sm rounded-lg p-3 mb-4">
+                  {error}
+                </div>
+              )}
+
               {/* Action Buttons */}
               <div className="space-y-3 satoshi-font mb-6">
                 <button
-                  onClick={onContinueToBilling}
-                  className="w-full bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center"
+                  onClick={handleContinue}
+                  className={`w-full bg-red-600 text-white py-3 px-6 rounded-lg flex items-center justify-center transition-colors ${
+                    loading ? "opacity-70 cursor-not-allowed" : "hover:bg-red-700"
+                  }`}
+                  disabled={loading}
                 >
-                  Continue to Billing
+                  {loading ? "Processing..." : "Continue to Billing"}
                   <Image
                     src="/assets/images/arrow.svg"
-                    alt="Time Attack Car"
+                    alt="Arrow"
                     width={27}
                     height={27}
+                    className="ml-2"
                   />
                 </button>
                 <button
                   onClick={onBackToExperiences}
-                  className="w-full border border-red-600 text-red-600 py-3 px-6 rounded-lg hover:bg-red-50 transition-colors flex items-center justify-center"
+                  className={`w-full border border-red-600 text-red-600 py-3 px-6 rounded-lg flex items-center justify-center transition-colors ${
+                    loading ? "opacity-70 cursor-not-allowed" : "hover:bg-red-50"
+                  }`}
+                  disabled={loading}
                 >
                   <Image
                     src="/assets/images/red-arrow.svg"
-                    alt="Time Attack Car"
+                    alt="Back"
                     width={27}
                     height={27}
+                    className="mr-2"
                   />
                   Back to Experiences
                 </button>
@@ -293,7 +316,7 @@ export default function CartComponent({
                 <div className="flex items-center mb-2">
                   <Image
                     src="/assets/images/badge.svg"
-                    alt="Time Attack Car"
+                    alt="Badge"
                     width={26}
                     height={26}
                   />

@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { getJson } from "@/lib/api";
+import type { CheckoutApiResponse, CheckoutOrder } from "@/app/checkout-flow/types";
 
 export default function Ticket() {
     const tickets = [
@@ -99,6 +102,56 @@ export default function Ticket() {
     // Handle form submission here
   };
 
+  const searchParams = useSearchParams();
+  const orderIdFromQuery = searchParams.get("orderId");
+
+  const [order, setOrder] = useState<CheckoutOrder | null>(null);
+  const [orderLoading, setOrderLoading] = useState(false);
+  const [orderError, setOrderError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let resolvedId = orderIdFromQuery;
+    if (!resolvedId && typeof window !== "undefined") {
+      resolvedId = sessionStorage.getItem("latestOrderId");
+    }
+
+    if (!resolvedId) {
+      setOrder(null);
+      return;
+    }
+
+    setOrderLoading(true);
+    setOrderError(null);
+
+    getJson<CheckoutApiResponse>(`/checkout/${resolvedId}`)
+      .then((response) => {
+        setOrder(response.order);
+      })
+      .catch((err: unknown) => {
+        setOrderError(
+          err instanceof Error
+            ? err.message
+            : "Unable to load your recent order."
+        );
+      })
+      .finally(() => {
+        setOrderLoading(false);
+      });
+  }, [orderIdFromQuery]);
+
+  const formatCurrency = (value: number, currency = "PKR") =>
+    `${currency} ${value.toLocaleString()}`;
+
+  const orderTotals = order
+    ? {
+        subtotal: order.amounts.subtotal,
+        serviceFee: order.amounts.service_fee,
+        tax: order.amounts.tax,
+        total: order.amounts.total,
+        currency: order.amounts.currency ?? "PKR",
+      }
+    : null;
+
   return (
     <div className="min-h-screen mt-40 button-font bg-white">
       {/* Header */}
@@ -192,38 +245,67 @@ export default function Ticket() {
               </h2>
 
               <div className="flex flex-col bg-white items-center justify-center py-12 text-center">
-                <Image 
-                  src="/assets/images/cart.svg" 
-                  alt="cart" 
-                  width={52} 
-                  height={52}
-                  className="mb-4"
-                />
-                <p className="text-gray-500 text-sm mb-1">Your cart is empty</p>
-                <p className="text-gray-500 text-sm">Add tickets to get started</p>
+                {orderLoading ? (
+                  <p className="text-gray-500 text-sm">Loading your latest booking...</p>
+                ) : order ? (
+                  <div className="w-full px-2 text-left space-y-1">
+                    <div className="flex justify-between text-sm font-semibold text-gray-900">
+                      <span>{order.cart.product}</span>
+                      <span>x{order.cart.quantity}</span>
+                    </div>
+                    {order.cart.package && (
+                      <div className="text-xs text-gray-600">{order.cart.package}</div>
+                    )}
+                    <div className="text-xs text-gray-500">
+                      Reference: {order.reference}
+                    </div>
+                  </div>
+                ) : orderError ? (
+                  <div className="text-sm text-red-600 px-4">{orderError}</div>
+                ) : (
+                  <>
+                    <Image
+                      src="/assets/images/cart.svg"
+                      alt="cart"
+                      width={52}
+                      height={52}
+                      className="mb-4"
+                    />
+                    <p className="text-gray-500 text-sm mb-1">Your cart is empty</p>
+                    <p className="text-gray-500 text-sm">Add tickets to get started</p>
+                  </>
+                )}
               </div>
-<div className="bg-white mt-6 p-2">
-              <div className=" pt-4 mb-4">
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Order Summary</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Subtotal</span>
-                    <span className="font-semibold">PKR 0</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Service Fee</span>
-                    <span className="font-semibold">PKR 0</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Tax</span>
-                    <span className="font-semibold">PKR 0</span>
-                  </div>
-                  <div className="border-t border-gray-200 pt-2 flex justify-between text-base">
-                    <span className="font-bold text-gray-900">Total</span>
-                    <span className="font-bold text-red-600">PKR 0</span>
+              <div className="bg-white mt-6 p-2">
+                <div className="pt-4 mb-4">
+                  <h3 className="text-sm font-bold text-gray-900 mb-3">Order Summary</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Subtotal</span>
+                      <span className="font-semibold">
+                        {formatCurrency(orderTotals?.subtotal ?? 0, orderTotals?.currency)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Service Fee</span>
+                      <span className="font-semibold">
+                        {formatCurrency(orderTotals?.serviceFee ?? 0, orderTotals?.currency)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Tax</span>
+                      <span className="font-semibold">
+                        {formatCurrency(orderTotals?.tax ?? 0, orderTotals?.currency)}
+                      </span>
+                    </div>
+                    <div className="border-t border-gray-200 pt-2 flex justify-between text-base">
+                      <span className="font-bold text-gray-900">Total</span>
+                      <span className="font-bold text-red-600">
+                        {formatCurrency(orderTotals?.total ?? 0, orderTotals?.currency)}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
 
               <button className="w-full mt-5 bg-[#000000] hover:bg-gray-800 text-white font-semibold py-3 rounded-lg transition-colors mb-4">

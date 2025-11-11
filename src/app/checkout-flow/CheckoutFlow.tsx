@@ -1,23 +1,129 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import CartComponent from "./CartComponent";
 import BillingComponent from "./BillingComponent";
 import PaymentComponent from "./PaymentComponent";
 import ConfirmationComponent from "./ConfirmationComponent";
+import { postJson } from "@/lib/api";
+import type {
+  BillingPayload,
+  CartPayload,
+  CheckoutApiResponse,
+  CheckoutOrder,
+  PaymentPayload,
+  PricingConfig,
+} from "./types";
+
+const PRICING: PricingConfig = {
+  product: "Time Attack",
+  package: "VIP Package",
+  unitPrice: 12000,
+  serviceFee: 500,
+  gstRate: 0.17,
+};
+
+type Step = "cart" | "billing" | "payment" | "confirmation";
 
 export default function CheckoutFlow() {
-  const [currentStep, setCurrentStep] = useState<
-    "cart" | "billing" | "payment" | "confirmation"
-  >("cart");
+  const [currentStep, setCurrentStep] = useState<Step>("cart");
+  const [order, setOrder] = useState<CheckoutOrder | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const goToBilling = () => setCurrentStep("billing");
-  const goToPayment = () => setCurrentStep("payment");
-  const goToConfirmation = () => setCurrentStep("confirmation");
-  const goToCart = () => setCurrentStep("cart");
-  const goToExperiences = () => {
-    // Navigate back to experiences page
+  const resetError = () => setError(null);
+
+  const handleCartContinue = useCallback(
+    async ({ quantity, promoCode }: CartPayload) => {
+      setLoading(true);
+      resetError();
+      try {
+        const response = await postJson<CheckoutApiResponse, Record<string, unknown>>(
+          "/checkout/cart",
+          {
+            product: PRICING.product,
+            package: PRICING.package,
+            quantity,
+            unit_price: PRICING.unitPrice,
+            service_fee: PRICING.serviceFee,
+            gst_rate: PRICING.gstRate,
+            promo_code: promoCode,
+          }
+        );
+        setOrder(response.order);
+        setCurrentStep("billing");
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unable to continue to billing.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
+
+  const handleBillingContinue = useCallback(
+    async (payload: BillingPayload) => {
+      if (!order) {
+        setError("No order found. Please restart the checkout flow.");
+        return;
+      }
+
+      setLoading(true);
+      resetError();
+      try {
+        const response = await postJson<CheckoutApiResponse, BillingPayload>(
+          `/checkout/${order.id}/billing`,
+          payload
+        );
+        setOrder(response.order);
+        setCurrentStep("payment");
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unable to save billing information.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [order]
+  );
+
+  const handlePaymentProceed = useCallback(
+    async (payload: PaymentPayload) => {
+      if (!order) {
+        setError("No order found. Please restart the checkout flow.");
+        return;
+      }
+
+      setLoading(true);
+      resetError();
+      try {
+        const response = await postJson<CheckoutApiResponse, PaymentPayload>(
+          `/checkout/${order.id}/payment`,
+          payload
+        );
+        setOrder(response.order);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("latestOrderId", String(response.order.id));
+          sessionStorage.setItem(
+            "latestOrderReference",
+            response.order.reference ?? ""
+          );
+        }
+        setCurrentStep("confirmation");
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unable to process payment.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [order]
+  );
+
+  const handleBackToExperiences = () => {
     window.location.href = "/experiences";
+  };
+
+  const handleBackToCart = () => {
+    setCurrentStep("cart");
   };
 
   const renderStep = () => {
@@ -25,28 +131,38 @@ export default function CheckoutFlow() {
       case "cart":
         return (
           <CartComponent
-            onContinueToBilling={goToBilling}
-            onBackToExperiences={goToExperiences}
+            pricing={PRICING}
+            order={order}
+            onContinueToBilling={handleCartContinue}
+            onBackToExperiences={handleBackToExperiences}
+            loading={loading}
+            error={error}
           />
         );
       case "billing":
-        return (
+        return order ? (
           <BillingComponent
-            onContinueToPayment={goToPayment}
-            onBackToCart={goToCart}
+            pricing={PRICING}
+            order={order}
+            onContinueToPayment={handleBillingContinue}
+            onBackToCart={handleBackToCart}
+            loading={loading}
+            error={error}
           />
-        );
+        ) : null;
       case "payment":
-        return <PaymentComponent onProceedToConfirmation={goToConfirmation} />;
-      case "confirmation":
-        return <ConfirmationComponent />;
-      default:
-        return (
-          <CartComponent
-            onContinueToBilling={goToBilling}
-            onBackToExperiences={goToExperiences}
+        return order ? (
+          <PaymentComponent
+            order={order}
+            onProceedToConfirmation={handlePaymentProceed}
+            loading={loading}
+            error={error}
           />
-        );
+        ) : null;
+      case "confirmation":
+        return order ? <ConfirmationComponent order={order} /> : null;
+      default:
+        return null;
     }
   };
 

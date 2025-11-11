@@ -1,6 +1,36 @@
+'use client'
 import Image from 'next/image';
+import { useState } from 'react';
+import { postJson } from '@/lib/api';
 
 export default function GoKartingRegistrationForm() {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successId, setSuccessId] = useState<number | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+    setSuccessId(null);
+    const fd = new FormData(e.currentTarget);
+    const payload: Record<string, any> = {};
+    fd.forEach((v, k) => { payload[k] = v; });
+    try {
+      const resp = await postJson<{ success: boolean; id: number }>('/experience-registrations', {
+        form_type: 'go-karting',
+        payload,
+      });
+      setSuccessId(resp.id);
+      e.currentTarget.reset();
+    } catch (err: any) {
+      setError(err?.message || 'Failed to submit');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#F5F5F5]  py-12 px-4">
       <div className="max-w-3xl mx-auto">
@@ -16,7 +46,9 @@ export default function GoKartingRegistrationForm() {
 
         {/* Form Container */}
         <div className="bg-white rounded-lg shadow-sm p-8 md:p-12 mb-8">
-          <form>
+          {successId && <div className="mb-4 rounded-md border border-green-200 bg-green-50 p-4 text-green-800">Submitted. Reference: {successId}</div>}
+          {error && <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-4 text-red-800">{error}</div>}
+          <form onSubmit={handleSubmit}>
             {/* Row 1: Full Name and Phone Number */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               {/* Full Name */}
@@ -26,6 +58,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <input
                   type="text"
+                  name="full_name"
                   placeholder="Enter your full name"
                   className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
@@ -39,6 +72,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="+92 300 1234567"
                   className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
@@ -55,6 +89,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="your.email@example.com"
                   className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
@@ -68,6 +103,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <input
                   type="number"
+                  name="age"
                   placeholder="18"
                   className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
@@ -84,6 +120,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <input
                   type="number"
+                  name="weight"
                   placeholder="70"
                   className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
@@ -98,6 +135,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <input
                   type="number"
+                  name="group_size"
                   placeholder="1"
                   className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                 />
@@ -112,6 +150,7 @@ export default function GoKartingRegistrationForm() {
                   Session Preference
                 </label>
                 <select
+                  name="session_preference"
                   className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5] "
                 >
                   <option value="">Morning (9:00 - 12:00)</option>
@@ -127,6 +166,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <input
                   type="date"
+                  name="preferred_date"
                   placeholder="mm/dd/yyyy"
                   className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
@@ -145,24 +185,24 @@ export default function GoKartingRegistrationForm() {
                 className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]  resize-none"
               ></textarea>
             </div>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-red-600 cursor-pointer hover:bg-red-700 button-font text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg disabled:opacity-60"
+                disabled={submitting}
+              >
+                {submitting ? 'Submitting...' : 'Complete Registration'}
+                <Image
+                  src="/assets/images/arrow.svg"
+                  alt="arrow"
+                  width={32}
+                  height={32}
+                />
+              </button>
+            </div>
           </form>
         </div>
 
-        {/* Submit Button */}
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="bg-red-600 cursor-pointer hover:bg-red-700 button-font text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center gap-3 shadow-lg"
-          >
-            Complete Registration
-            <Image
-              src="/assets/images/arrow.svg"
-              alt="arrow"
-              width={32}
-              height={32}
-            />
-          </button>
-        </div>
       </div>
     </div>
   );
