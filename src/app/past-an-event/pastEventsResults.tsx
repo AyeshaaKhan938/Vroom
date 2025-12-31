@@ -83,7 +83,7 @@ export default function PastEventsResults() {
 
       {/* Event Timeline Section */}
       <div className="px-6 py-12 md:px-12 lg:px-24">
-        <h2 className="text-3xl font-bold mb-8">Event Timeline 2024</h2>
+        <h2 className="text-3xl text-black font-bold mb-8">Event Timeline 2024</h2>
         
         {/* Month Buttons */}
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-3">
@@ -104,7 +104,7 @@ export default function PastEventsResults() {
 
       {/* Featured Past Events Section */}
       <div className="px-6 py-12 md:px-12 lg:px-24 bg-[#F5F5F5]">
-        <h2 className="text-3xl font-bold mb-8">Featured Past Events</h2>
+        <h2 className="text-3xl text-black font-bold mb-8">Featured Past Events</h2>
         
         {/* Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -122,7 +122,7 @@ export default function PastEventsResults() {
               </div>
             </div>
             <div className="p-5">
-              <h3 className="text-xl font-bold mt-4 mb-3">Championship Grand Prix</h3>
+              <h3 className="text-xl text-black font-bold mt-4 mb-3">Championship Grand Prix</h3>
               <div className="flex justify-between text-sm text-gray-600 mb-3">
                 <span>156 Participants</span>
                 <span>Professional Category</span>
@@ -133,7 +133,7 @@ export default function PastEventsResults() {
                 alt="6-Hour Endurance Challenge" 
                 className="w-5 h-5"
               />
-                <span className="font-medium">Winner: Marcus Rodriguez</span>
+                <span className="font-medium text-black">Winner: Marcus Rodriguez</span>
               </div>
               
             </div>
@@ -155,7 +155,7 @@ export default function PastEventsResults() {
               </div>
             </div>
             <div className="p-5">
-              <h3 className="text-xl font-bold mt-4 mb-3">Drift Masters Championship</h3>
+              <h3 className="text-xl text-black font-bold mt-4 mb-3">Drift Masters Championship</h3>
               <div className="flex justify-between text-sm text-gray-600 mb-3">
                 <span>89 Participants</span>
                 <span>Professional Category</span>
@@ -166,7 +166,7 @@ export default function PastEventsResults() {
                 alt="6-Hour Endurance Challenge" 
                 className="w-5 h-5"
               />
-                <span className="font-medium">Winner: Akira Tanaka</span>
+                <span className="font-medium text-black">Winner: Akira Tanaka</span>
               </div>
              
             </div>
@@ -188,7 +188,7 @@ export default function PastEventsResults() {
               </div>
             </div>
             <div className="p-5">
-              <h3 className="text-xl font-bold mt-4 mb-3">Tech Leaders Racing Challenge</h3>
+              <h3 className="text-xl text-black font-bold mt-4 mb-3">Tech Leaders Racing Challenge</h3>
               <div className="flex justify-between text-sm text-gray-600 mb-3">
                 <span>64 Participants</span>
                 <span>Corporate Category</span>
@@ -199,7 +199,7 @@ export default function PastEventsResults() {
                 alt="6-Hour Endurance Challenge" 
                 className="w-5 h-5"
               />
-                <span className="font-medium">Winner: TechCorp Team Alpha</span>
+                <span className="font-medium text-black">Winner: TechCorp Team Alpha</span>
               </div>
              
             </div>
@@ -221,7 +221,7 @@ export default function PastEventsResults() {
               </div>
             </div>
             <div className="p-5">
-              <h3 className="text-xl font-bold mt-4 mb-3">Summer Amateur Cup</h3>
+              <h3 className="text-xl text-black font-bold mt-4 mb-3">Summer Amateur Cup</h3>
               <div className="flex justify-between text-sm text-gray-600 mb-3">
                 <span>132 Participants</span>
                 <span>Amateur Category</span>
@@ -232,7 +232,7 @@ export default function PastEventsResults() {
                 alt="6-Hour Endurance Challenge" 
                 className="w-5 h-5"
               />
-                <span className="font-medium">Winner: Sarah Chen</span>
+                <span className="font-medium text-black">Winner: Sarah Chen</span>
               </div>
               
             </div>
@@ -254,7 +254,7 @@ export default function PastEventsResults() {
               </div>
             </div>
             <div className="p-5">
-              <h3 className="text-xl font-bold mt-4 mb-3">Midnight Thunder Race</h3>
+              <h3 className="text-xl text-black font-bold mt-4 mb-3">Midnight Thunder Race</h3>
               <div className="flex justify-between text-sm text-gray-600 mb-3">
                 <span>98 Participants</span>
                 <span>Professional Category</span>
@@ -265,7 +265,7 @@ export default function PastEventsResults() {
                 alt="6-Hour Endurance Challenge" 
                 className="w-5 h-5"
               />
-                <span className="font-medium">Winner: Diego Martinez</span>
+                <span className="font-medium text-black">Winner: Diego Martinez</span>
               </div>
              
             </div>
@@ -287,7 +287,7 @@ export default function PastEventsResults() {
               </div>
             </div>
             <div className="p-5">
-              <h3 className="text-xl font-bold mt-4 mb-3">6-Hour Endurance Challenge</h3>
+              <h3 className="text-xl text-black font-bold mt-4 mb-3">6-Hour Endurance Challenge</h3>
               <div className="flex justify-between text-sm text-gray-600 mb-3">
                 <span>72 Participants</span>
                 <span>Professional Category</span>
@@ -298,7 +298,7 @@ export default function PastEventsResults() {
                 alt="6-Hour Endurance Challenge" 
                 className="w-5 h-5"
               />
-                <span className="font-medium">Winner: Team Velocity</span>
+                <span className="font-medium text-black">Winner: Team Velocity</span>
               </div>
               
             </div>
@@ -307,7 +307,7 @@ export default function PastEventsResults() {
       </div>
        {/* Event Highlights & Statistics Section */}
       <div className="px-6 py-12 md:px-12 lg:px-24 bg-white">
-        <h2 className="text-3xl font-bold mb-8">Event Highlights & Statistics</h2>
+        <h2 className="text-3xl text-black font-bold mb-8">Event Highlights & Statistics</h2>
         
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -337,7 +337,7 @@ export default function PastEventsResults() {
         </div>
 
         {/* Memorable Moments Section */}
-        <h3 className="text-2xl font-bold mb-6">Memorable Moments</h3>
+        <h3 className="text-2xl text-black font-bold mb-6">Memorable Moments</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {/* Moment Card 1 */}
@@ -349,7 +349,7 @@ export default function PastEventsResults() {
                 className="w-10 h-10"
               />
               <div className="flex-1">
-                <h4 className="font-bold text-lg mb-2">Circuit Record Broken</h4>
+                <h4 className="font-bold text-black text-lg mb-2">Circuit Record Broken</h4>
                 <p className="text-gray-700 text-sm mb-3">
                   Marcus Rodriguez set a new track record of 1:42.8 during the Championship Grand Prix, breaking the previous record by 0.3 seconds.
                 </p>
@@ -367,7 +367,7 @@ export default function PastEventsResults() {
                 className="w-10 h-10"
               />
               <div className="flex-1">
-                <h4 className="font-bold text-lg mb-2">Largest Corporate Event</h4>
+                <h4 className="font-bold text-black text-lg mb-2">Largest Corporate Event</h4>
                 <p className="text-gray-700 text-sm mb-3">
                   Tech Leaders Racing Challenge hosted the largest corporate racing event with 64 participants from 12 different companies competing.
                 </p>
@@ -385,7 +385,7 @@ export default function PastEventsResults() {
                 className="w-10 h-10"
               />
               <div className="flex-1">
-                <h4 className="font-bold text-lg mb-2">Perfect Weather Championship</h4>
+                <h4 className="font-bold text-black text-lg mb-2">Perfect Weather Championship</h4>
                 <p className="text-gray-700 text-sm mb-3">
                   The Summer Amateur Cup was held under perfect racing conditions with ideal temperature and clear skies throughout the entire event.
                 </p>
@@ -403,7 +403,7 @@ export default function PastEventsResults() {
                 className="w-10 h-10"
               />
               <div className="flex-1">
-                <h4 className="font-bold text-lg mb-2">First Night Racing Event</h4>
+                <h4 className="font-bold text-black text-lg mb-2">First Night Racing Event</h4>
                 <p className="text-gray-700 text-sm mb-3">
                   Midnight Thunder Race marked our first-ever night racing event, featuring spectacular illuminated track using under floodlights.
                 </p>
@@ -414,25 +414,25 @@ export default function PastEventsResults() {
         </div>
 
         {/* Record Achievements Section */}
-        <h3 className="text-2xl font-bold mb-6">Record Achievements</h3>
+        <h3 className="text-2xl text-black font-bold mb-6">Record Achievements</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Achievement Card 1 */}
-          <div className="bg-[#F5F5F5]  text-center py-8 px-6 rounded-lg">
+          <div className="bg-[#F5F5F5] text-black  text-center py-8 px-6 rounded-lg">
             <div className="text-4xl font-bold text-red-600 mb-2">1:42.8</div>
             <div className="font-bold text-lg mb-1">Fastest Lap Time</div>
             <div className="text-gray-600 text-sm">Marcus Rodriguez</div>
           </div>
 
           {/* Achievement Card 2 */}
-          <div className="bg-[#F5F5F5]  text-center py-8 px-6 rounded-lg">
+          <div className="bg-[#F5F5F5] text-black  text-center py-8 px-6 rounded-lg">
             <div className="text-4xl font-bold text-red-600 mb-2">156</div>
             <div className="font-bold text-lg mb-1">Most Participants</div>
             <div className="text-gray-600 text-sm">Championship Grand Prix</div>
           </div>
 
           {/* Achievement Card 3 */}
-          <div className="bg-[#F5F5F5]  text-center py-8 px-6 rounded-lg">
+          <div className="bg-[#F5F5F5] text-black  text-center py-8 px-6 rounded-lg">
             <div className="text-4xl font-bold text-red-600 mb-2">6 Hours</div>
             <div className="font-bold text-lg mb-1">Longest Race Duration</div>
             <div className="text-gray-600 text-sm">Endurance Challenge</div>

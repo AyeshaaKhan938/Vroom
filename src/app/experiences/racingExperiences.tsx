@@ -45,7 +45,10 @@ const RacingExperiences = () => {
     <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Header */}
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold button-font text-gray-900 mb-2">Racing Experiences</h2>
+      <h2 className="text-3xl font-bold button-font text-gray-900 dark:text-white mb-2">
+  Racing Experiences
+</h2>
+
         <p className="text-[#000000B2] button-font">Discover pure adrenaline adventure</p>
       </div>
 

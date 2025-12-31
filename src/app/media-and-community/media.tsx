@@ -28,12 +28,12 @@ export default function Media() {
  <div className="min-h-screen ">
       {/* Header */}
       <div className="text-center py-12">
-        <h1 className="text-4xl font-bold">Media And Community</h1>
+        <h1 className="text-4xl text-black font-bold">Media And Community</h1>
       </div>
 
       {/* Racing Highlights Section */}
       <div className="px-6 py-12 button-font md:px-12 lg:px-24 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4">RACING HIGHLIGHTS</h2>
+        <h2 className="text-3xl text-black font-bold mb-4">RACING HIGHLIGHTS</h2>
         <p className="text-gray-700 mb-8">
           Relive the most exciting moments from our track with professionally captured racing footage and driver interviews
         </p>
@@ -54,7 +54,7 @@ export default function Media() {
               </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-2">Championship Finals 2024</h3>
+              <h3 className="text-xl text-black font-bold mb-2">Championship Finals 2024</h3>
               <p className="text-gray-600 text-sm mb-4">
                 Watch the thrilling finale of our annual championship series featuring the top drivers competing for ultimate glory
               </p>
@@ -84,7 +84,7 @@ export default function Media() {
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-bold mb-2">Driver Spotlight: Marcus Chen</h3>
+                <h3 className="text-lg text-black font-bold mb-2">Driver Spotlight: Marcus Chen</h3>
                 <p className="text-gray-600 text-sm mb-3">
                   Exclusive interview with our championship leader
                 </p>
@@ -106,7 +106,7 @@ export default function Media() {
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-bold mb-2">Behind the Scenes</h3>
+                <h3 className="text-lg text-black font-bold mb-2">Behind the Scenes</h3>
                 <p className="text-gray-600 text-sm mb-3">
                   See what happens in the pit before race day
                 </p>

@@ -152,7 +152,7 @@ export default function CartComponent({
                   <div className="flex items-center satoshi-font justify-between">
                     <div className="flex items-center button-font space-x-4">
                       <span className="text-gray-700">Quantity:</span>
-                      <div className="flex items-center border border-gray-300 rounded-lg">
+                      <div className="flex items-center border border-gray-300 text-black rounded-lg">
                         <button
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
                           className="px-3 py-2 text-gray-600 hover:text-gray-800"
@@ -216,7 +216,7 @@ export default function CartComponent({
                   placeholder="Enter promo code"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="flex-1 px-4 text-black py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   disabled={loading}
                 />
                 <button

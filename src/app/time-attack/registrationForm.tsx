@@ -66,7 +66,7 @@ export default function RegistrationForm() {
                   type="text"
                   name="full_name"
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg bg-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg bg-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
                 />
               </div>
@@ -80,7 +80,7 @@ export default function RegistrationForm() {
                   type="tel"
                   name="phone"
                   placeholder="+92 XXX XXXXXXXX"
-                  className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full text-black px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
                 />
               </div>
@@ -103,7 +103,7 @@ export default function RegistrationForm() {
                   type="email"
                   name="email"
                   placeholder="your@email.com"
-                  className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full text-black px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
                 />
               </div>
@@ -123,7 +123,7 @@ export default function RegistrationForm() {
                   type="tel"
                   name="emergency_contact"
                   placeholder="+92 XXX XXXXXXXX"
-                  className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full text-black px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
                 />
               </div>
@@ -145,7 +145,7 @@ export default function RegistrationForm() {
                 <div className="relative">
                   <select
                     name="experience_level"
-                    className="w-full px-4 py-3 border border-gray-300 bg-[#F5F5F5] button-font rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
+                    className="w-full text-black px-4 py-3 border border-gray-300 bg-[#F5F5F5] button-font rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
                     required
                   >
                     <option value="">Select experience level</option>
@@ -182,7 +182,7 @@ export default function RegistrationForm() {
                 <div className="relative">
                   <select
                     name="car_type"
-                    className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
+                    className="w-full text-black px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
                     required
                   >
                     <option value="">Select car type</option>
@@ -222,7 +222,7 @@ export default function RegistrationForm() {
                 <div className="relative">
                   <select
                     name="session_preference"
-                    className="w-full px-4 py-3 button-font border bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
+                    className="w-full text-black px-4 py-3 button-font border bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none"
                     required
                   >
                     <option value="">Select preferred time</option>
@@ -259,7 +259,7 @@ export default function RegistrationForm() {
                   type="date"
                   name="preferred_date"
                   placeholder="mm/dd/yyyy"
-                  className="w-full px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full text-black px-4 py-3 border button-font bg-[#F5F5F5] border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
                   required
                 />
               </div>

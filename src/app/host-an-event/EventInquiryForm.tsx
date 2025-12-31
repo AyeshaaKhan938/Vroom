@@ -108,7 +108,7 @@ export default function EventInquiryForm() {
                   name="eventType"
                   value={formData.eventType}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 >
                   <option value="Corporate Event">Corporate Event</option>
@@ -131,7 +131,7 @@ export default function EventInquiryForm() {
                   value={formData.expectedParticipants}
                   onChange={handleInputChange}
                   placeholder="Number of attendees"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
                 {renderError('expectedParticipants')}
@@ -148,7 +148,7 @@ export default function EventInquiryForm() {
                   value={formData.contactPerson}
                   onChange={handleInputChange}
                   placeholder="Full name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
                 {renderError('contactPerson')}
@@ -165,7 +165,7 @@ export default function EventInquiryForm() {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="Phone number"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
                 {renderError('phone')}
@@ -185,7 +185,7 @@ export default function EventInquiryForm() {
                     name="preferredDate"
                     value={formData.preferredDate}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                     required
                   />
                   <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -204,7 +204,7 @@ export default function EventInquiryForm() {
                   name="budgetRange"
                   value={formData.budgetRange}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 >
                   <option value="$1,000 - $2,500">$1,000 - $2,500</option>
@@ -226,7 +226,7 @@ export default function EventInquiryForm() {
                   value={formData.company}
                   onChange={handleInputChange}
                   placeholder="Company name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
                 {renderError('company')}
               </div>
@@ -242,7 +242,7 @@ export default function EventInquiryForm() {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Email address"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
                 {renderError('email')}
@@ -263,7 +263,7 @@ export default function EventInquiryForm() {
                 onChange={handleInputChange}
                 placeholder="Describe your event goals, activities, and vision..."
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
                 required
               />
               {renderError('eventDescription')}
@@ -282,7 +282,7 @@ export default function EventInquiryForm() {
       onChange={handleInputChange}
       placeholder="Any specific needs or requests..."
       rows={3}
-      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+      className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
     />
     {renderError('specialRequirements')}
   </div>
@@ -296,7 +296,7 @@ export default function EventInquiryForm() {
       name="cateringNeeds"
       value={formData.cateringNeeds}
       onChange={handleInputChange}
-      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
+      className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg bg-[#f5f5f5] focus:outline-none focus:ring-2 focus:ring-red-500"
     >
       <option value="No catering needed">No catering needed</option>
       <option value="Light refreshments">Light refreshments</option>

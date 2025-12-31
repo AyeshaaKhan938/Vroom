@@ -198,7 +198,7 @@ export default function BillingComponent({
                     value={formData.firstName}
                     onChange={handleInputChange}
                     placeholder="Enter your first name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   />
@@ -213,7 +213,7 @@ export default function BillingComponent({
                     value={formData.lastName}
                     onChange={handleInputChange}
                     placeholder="Enter your last name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   />
@@ -228,7 +228,7 @@ export default function BillingComponent({
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your email address"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   />
@@ -243,7 +243,7 @@ export default function BillingComponent({
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="+92 XXXX XXX XXXX"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   />
@@ -267,7 +267,7 @@ export default function BillingComponent({
                     value={formData.streetAddress}
                     onChange={handleInputChange}
                     placeholder="Enter your street address"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   />
@@ -283,7 +283,7 @@ export default function BillingComponent({
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="Enter your city"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                      className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                       required
                       disabled={loading}
                     />
@@ -298,7 +298,7 @@ export default function BillingComponent({
                       value={formData.state}
                       onChange={handleInputChange}
                       placeholder="Enter your state/province"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                      className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                       required
                       disabled={loading}
                     />
@@ -313,7 +313,7 @@ export default function BillingComponent({
                       value={formData.postalCode}
                       onChange={handleInputChange}
                       placeholder="Enter postal code"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                      className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                       required
                       disabled={loading}
                     />
@@ -327,7 +327,7 @@ export default function BillingComponent({
                     name="country"
                     value={formData.country}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   >
@@ -358,7 +358,7 @@ export default function BillingComponent({
                     value={formData.emergencyContactName}
                     onChange={handleInputChange}
                     placeholder="Enter emergency contact name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   />
@@ -373,7 +373,7 @@ export default function BillingComponent({
                     value={formData.emergencyPhone}
                     onChange={handleInputChange}
                     placeholder="+92 XXXX XXX XXXX"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   />
@@ -386,7 +386,7 @@ export default function BillingComponent({
                     name="relationship"
                     value={formData.relationship}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
+                    className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-gray-50"
                     required
                     disabled={loading}
                   >

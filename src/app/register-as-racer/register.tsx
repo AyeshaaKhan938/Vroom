@@ -131,7 +131,7 @@ export default function Register() {
                     type="text"
                     name="full_name"
                     placeholder="Enter your full name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('full_name')}
@@ -144,7 +144,7 @@ export default function Register() {
                     type="date"
                     name="date_of_birth"
                     placeholder="mm/dd/yyyy"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('date_of_birth')}
@@ -159,7 +159,7 @@ export default function Register() {
                   <div className="relative">
                     <select
                       name="gender"
-                      className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                      className="w-full text-black px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                       required
                     >
                       <option value="">Select gender</option>
@@ -186,7 +186,7 @@ export default function Register() {
                     type="tel"
                     name="phone"
                     placeholder="+1 (555) 123-4567"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('phone')}
@@ -202,7 +202,7 @@ export default function Register() {
                     type="email"
                     name="email"
                     placeholder="your.email@example.com"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('email')}
@@ -215,7 +215,7 @@ export default function Register() {
                     type="text"
                     name="address"
                     placeholder="Full address"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('address')}
@@ -245,7 +245,7 @@ export default function Register() {
                     type="text"
                     name="license_number"
                     placeholder="License number"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   />
                   {renderError('license_number')}
                 </div>
@@ -257,7 +257,7 @@ export default function Register() {
                     type="number"
                     name="years_experience"
                     placeholder="0"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('years_experience')}
@@ -271,7 +271,7 @@ export default function Register() {
                 <div className="relative">
                   <select
                     name="racing_category"
-                    className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                     required
                   >
                     <option value="">Select category</option>
@@ -299,7 +299,7 @@ export default function Register() {
                   name="previous_events"
                   rows={4}
                   placeholder="List your previous racing events and achievements"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
                 ></textarea>
                 {renderError('previous_events')}
               </div>
@@ -327,7 +327,7 @@ export default function Register() {
                     type="text"
                     name="vehicle_make"
                     placeholder="Vehicle make"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('vehicle_make')}
@@ -340,7 +340,7 @@ export default function Register() {
                     type="text"
                     name="vehicle_model"
                     placeholder="Vehicle model"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('vehicle_model')}
@@ -356,7 +356,7 @@ export default function Register() {
                     type="text"
                     name="vehicle_year"
                     placeholder="2024"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('vehicle_year')}
@@ -369,7 +369,7 @@ export default function Register() {
                     type="text"
                     name="engine_size"
                     placeholder="Engine displacement"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('engine_size')}
@@ -384,7 +384,7 @@ export default function Register() {
                   name="modifications"
                   rows={3}
                   placeholder="List any vehicle modifications"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
                 ></textarea>
                 {renderError('modifications')}
               </div>
@@ -397,7 +397,7 @@ export default function Register() {
                   name="technical_specs"
                   rows={3}
                   placeholder="Additional technical details"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
                 ></textarea>
                 {renderError('technical_specs')}
               </div>
@@ -419,7 +419,7 @@ export default function Register() {
                     type="text"
                     name="emergency_contact_name"
                     placeholder="Emergency contact full name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('emergency_contact_name')}
@@ -432,7 +432,7 @@ export default function Register() {
                     type="text"
                     name="emergency_relationship"
                     placeholder="Spouse, Parent, Sibling, etc."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('emergency_relationship')}
@@ -447,7 +447,7 @@ export default function Register() {
                   type="tel"
                   name="emergency_phone"
                   placeholder="+1 (555) 123-4567"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
                 {renderError('emergency_phone')}
@@ -474,7 +474,7 @@ export default function Register() {
                 <div className="relative">
                   <select
                     name="blood_type"
-                    className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   >
                     <option value="">Select blood type</option>
                     <option value="A+">A+</option>
@@ -506,7 +506,7 @@ export default function Register() {
                   name="medical_conditions"
                   rows={3}
                   placeholder="List any medical conditions or allergies"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
                 ></textarea>
                 {renderError('medical_conditions')}
               </div>
@@ -519,7 +519,7 @@ export default function Register() {
                   name="medications"
                   rows={3}
                   placeholder="List current medications"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
                 ></textarea>
                 {renderError('medications')}
               </div>
@@ -547,7 +547,7 @@ export default function Register() {
                     type="text"
                     name="insurance_provider"
                     placeholder="Insurance company name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('insurance_provider')}
@@ -560,7 +560,7 @@ export default function Register() {
                     type="text"
                     name="policy_number"
                     placeholder="Policy number"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                     required
                   />
                   {renderError('policy_number')}
@@ -575,7 +575,7 @@ export default function Register() {
                   type="text"
                   name="coverage_amount"
                   placeholder="Coverage amount"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
                 {renderError('coverage_amount')}
@@ -751,7 +751,7 @@ export default function Register() {
                 <div className="relative">
                   <select
                     name="payment_method"
-                    className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                    className="w-full text-black px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                     required
                   >
                     <option value="">Select payment method</option>
@@ -778,7 +778,7 @@ export default function Register() {
             )}
             <button
               type="submit"
-              className="w-full cursor-pointer bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              className="w-full  cursor-pointer bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg transition-colors flex items-center justify-center gap-2"
               disabled={submitting}
             >
               {submitting ? 'Submitting...' : 'COMPLETE REGISTRATION'}

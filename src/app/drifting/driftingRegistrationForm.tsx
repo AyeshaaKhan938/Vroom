@@ -59,7 +59,7 @@ export default function DriftingRegistrationForm() {
                   type="text"
                   name="full_name"
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -73,7 +73,7 @@ export default function DriftingRegistrationForm() {
                   type="tel"
                   name="phone"
                   placeholder="Enter your phone number"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -90,7 +90,7 @@ export default function DriftingRegistrationForm() {
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -104,7 +104,7 @@ export default function DriftingRegistrationForm() {
                   type="text"
                   name="driving_license_number"
                   placeholder="Enter license number"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -119,7 +119,7 @@ export default function DriftingRegistrationForm() {
                 </label>
                 <select
                   name="experience_level"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   required
                 >
                   <option value="">Select experience level</option>
@@ -137,7 +137,7 @@ export default function DriftingRegistrationForm() {
                 </label>
                 <select
                   name="manual_transmission_experience"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   required
                 >
                   <option value="">Select option</option>
@@ -157,7 +157,7 @@ export default function DriftingRegistrationForm() {
                 name="previous_drift_experience"
                 rows={4}
                 placeholder="Describe any previous drifting or motorsport experience (optional)"
-                className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
+                className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
               ></textarea>
             </div>
 
@@ -172,7 +172,7 @@ export default function DriftingRegistrationForm() {
                   type="date"
                   name="preferred_session_date"
                   placeholder="mm/dd/yyyy"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -184,7 +184,7 @@ export default function DriftingRegistrationForm() {
                 </label>
                 <select
                   name="preferred_time_slot"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   required
                 >
                   <option value="">Select time slot</option>
@@ -204,7 +204,7 @@ export default function DriftingRegistrationForm() {
                 name="insurance_info"
                 type="text"
                 placeholder="Insurance company and policy number (if available)"
-                className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
               />
             </div>
             <div className="flex justify-center">

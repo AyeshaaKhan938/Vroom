@@ -70,6 +70,7 @@ export type BillingPayload = {
 
 export type PaymentPayload = {
   payment_method: string
+  payment_proof: File
 }
 
 export type CheckoutApiResponse = {

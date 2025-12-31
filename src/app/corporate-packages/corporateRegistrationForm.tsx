@@ -59,7 +59,7 @@ export default function CorporateRegistrationForm() {
                   type="text"
                   name="company_name"
                   placeholder="Enter company name"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -73,7 +73,7 @@ export default function CorporateRegistrationForm() {
                   type="text"
                   name="contact_person"
                   placeholder="Full name"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -90,7 +90,7 @@ export default function CorporateRegistrationForm() {
                   type="text"
                   name="title"
                   placeholder="Job title"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -104,7 +104,7 @@ export default function CorporateRegistrationForm() {
                   type="tel"
                   name="phone"
                   placeholder="+92 300 1234567"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -119,7 +119,7 @@ export default function CorporateRegistrationForm() {
                 type="email"
                 name="email"
                 placeholder="contact@company.com"
-                className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                 required
               />
             </div>
@@ -135,7 +135,7 @@ export default function CorporateRegistrationForm() {
                   type="date"
                   name="preferred_event_date"
                   placeholder="mm/dd/yyyy"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]"
                   required
                 />
               </div>
@@ -147,7 +147,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <select
                   name="expected_attendees"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   required
                 >
                   <option value="">Select number of attendees</option>
@@ -168,7 +168,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <select
                   name="package_interest"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                   required
                 >
                   <option value="">Select package type</option>
@@ -186,7 +186,7 @@ export default function CorporateRegistrationForm() {
                 </label>
                 <select
                   name="budget_range"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5]"
                 >
                   <option value="">Select budget range</option>
                   <option value="50k-100k">PKR 50,000 - 100,000</option>
@@ -239,7 +239,7 @@ export default function CorporateRegistrationForm() {
                 name="special_requests"
                 rows={4}
                 placeholder="Any specific requirements, themes, or objectives for your corporate event..."
-                className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
+                className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] resize-none"
               ></textarea>
             </div>
              <div className="flex justify-center">

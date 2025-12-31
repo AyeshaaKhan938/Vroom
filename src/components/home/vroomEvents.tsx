@@ -84,7 +84,7 @@ export default function VroomEvents() {
                  onClick={() => {
   if (event.button === 'Explore Now') {
     router.push('/events');
-  } else if (event.button === 'About Track') {
+  } else if (event.button === 'About Us') {
     router.push('/about-track');
   } else if (event.button === 'Check out') {
     router.push('/checkout-flow');

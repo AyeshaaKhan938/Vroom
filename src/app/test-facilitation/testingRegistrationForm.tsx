@@ -87,7 +87,7 @@ export default function TestingRegistrationForm() {
                   type="text"
                   name="contact_person"
                   placeholder="Full Name"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                 />
               </div>
               <div>
@@ -98,7 +98,7 @@ export default function TestingRegistrationForm() {
                   type="tel"
                   name="phone"
                   placeholder="+92 300 1234567"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                 />
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function TestingRegistrationForm() {
                 type="email"
                 name="email"
                 placeholder="your.email@example.com"
-                className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
+                className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
               />
             </div>
 
@@ -130,7 +130,7 @@ export default function TestingRegistrationForm() {
                     type="text"
                     name="vehicle_make"
                     placeholder="Toyota"
-                    className="w-full px-4 py-2 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
+                    className="w-full text-black px-4 py-2 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                   />
                 </div>
                 <div>
@@ -141,7 +141,7 @@ export default function TestingRegistrationForm() {
                     type="text"
                     name="vehicle_model"
                     placeholder="Supra"
-                    className="w-full px-4 py-2 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
+                    className="w-full text-black px-4 py-2 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                   />
                 </div>
                 <div>
@@ -152,7 +152,7 @@ export default function TestingRegistrationForm() {
                     type="text"
                     name="vehicle_year"
                     placeholder="2024"
-                    className="w-full px-4 py-2 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
+                    className="w-full text-black px-4 py-2 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                   />
                 </div>
               </div>
@@ -164,7 +164,7 @@ export default function TestingRegistrationForm() {
                 Testing Purpose
               </label>
               <select
-                className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-gray-50"
+                className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-gray-50"
                 name="testing_purpose"
               >
                 <option value="">Performance Testing</option>
@@ -254,7 +254,7 @@ export default function TestingRegistrationForm() {
                 rows={3}
                 name="technical_requirements"
                 placeholder="Describe any specific technical requirements or equipment needs for your testing session..."
-                className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50 resize-none"
+                className="w-full text-black px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50 resize-none"
               ></textarea>
             </div>
 
@@ -268,7 +268,7 @@ export default function TestingRegistrationForm() {
                   type="date"
                   name="preferred_start_date"
                   placeholder="mm/dd/yyyy"
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-50"
                 />
               </div>
               <div>
@@ -276,7 +276,7 @@ export default function TestingRegistrationForm() {
                   Duration
                 </label>
                 <select
-                  className="w-full px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-gray-50"
+                  className="w-full text-black px-4 py-3 button-font border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-gray-50"
                   name="duration"
                 >
                   <option value="">Half Day (4 hours)</option>

@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import type {
-  CheckoutOrder,
-  PaymentPayload,
-} from "./types";
+import type { CheckoutOrder, PaymentPayload } from "./types";
 
 interface PaymentComponentProps {
   order: CheckoutOrder;
@@ -13,13 +10,6 @@ interface PaymentComponentProps {
   loading: boolean;
   error?: string | null;
 }
-
-const PAYMENT_METHODS = [
-  { id: "card", label: "Card Payment" },
-  { id: "easypaisa", label: "Easypaisa" },
-  { id: "jazzcash", label: "JazzCash" },
-  { id: "bank", label: "Bank Transfer" },
-];
 
 const TIMER_SEGMENTS = ["hours", "minutes", "seconds"] as const;
 
@@ -29,20 +19,13 @@ export default function PaymentComponent({
   loading,
   error,
 }: PaymentComponentProps) {
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>(
-    order.payment.method ?? ""
-  );
+  const [paymentProof, setPaymentProof] = useState<File | null>(null);
+  const [localError, setLocalError] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState({
     hours: 5,
     minutes: 0,
     seconds: 0,
   });
-
-  useEffect(() => {
-    if (order.payment.method) {
-      setSelectedPaymentMethod(order.payment.method);
-    }
-  }, [order.payment.method]);
 
   // Countdown timer effect
   useEffect(() => {
@@ -75,9 +58,23 @@ export default function PaymentComponent({
     }));
   }, [order.cart]);
 
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+    setPaymentProof(file);
+    setLocalError(null);
+  };
+
   const handleProceed = async () => {
-    if (!selectedPaymentMethod || loading) return;
-    await onProceedToConfirmation({ payment_method: selectedPaymentMethod });
+    if (loading) return;
+    if (!paymentProof) {
+      setLocalError("Please upload your bank transfer receipt to continue.");
+      return;
+    }
+
+    await onProceedToConfirmation({
+      payment_method: "bank_transfer",
+      payment_proof: paymentProof,
+    });
   };
 
   return (
@@ -162,31 +159,60 @@ export default function PaymentComponent({
           {/* Payment Method */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Payment Method
+              Manual Bank Transfer Only
             </h3>
 
-            <div className="flex flex-wrap justify-start gap-3">
-              {PAYMENT_METHODS.map((method) => (
-                <button
-                  key={method.id}
-                  type="button"
-                  onClick={() => setSelectedPaymentMethod(method.id)}
-                  className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
-                    selectedPaymentMethod === method.id
-                      ? "border-red-600 bg-red-50 text-red-600"
-                      : "border-gray-200 text-gray-700 hover:border-gray-300"
-                  }`}
-                  disabled={loading}
-                >
-                  {method.label}
-                </button>
-              ))}
+            <div className="rounded-lg border border-gray-200 bg-[#FFF7F2] p-6 text-sm text-gray-700">
+              <p className="font-semibold text-gray-900 mb-3">
+                Please transfer the total amount to the following account and upload the
+                transaction receipt.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="font-semibold text-gray-900">Account Name:</span>
+                  <p>Vroom Racing Experiences</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-gray-900">Account Number:</span>
+                  <p>001122334455</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-gray-900">IBAN:</span>
+                  <p>PK12HAB1234567890001234</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-gray-900">Bank & Branch:</span>
+                  <p>HBL – DHA Phase 6, Karachi</p>
+                </div>
+              </div>
+              <p className="mt-4 text-xs text-gray-600">
+                Once we verify your payment, you will receive a confirmation email.
+              </p>
             </div>
           </div>
 
-          {error && (
+          {/* Upload payment proof */}
+          <div className="mb-8">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
+              Upload Transfer Receipt (JPG, PNG, or PDF)
+            </label>
+            <input
+              type="file"
+              accept=".jpg,.jpeg,.png,.pdf"
+              onChange={handleFileChange}
+              disabled={loading}
+              className="w-full cursor-pointer rounded-md border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
+            {paymentProof && (
+              <p className="mt-2 text-sm text-gray-600">
+                Selected file: <span className="font-medium">{paymentProof.name}</span>
+              </p>
+            )}
+          </div>
+
+          {(error || localError) && (
             <div className="bg-red-50 text-red-600 text-sm rounded-lg p-3 mb-6 text-center">
-              {error}
+              {error || localError}
             </div>
           )}
 
@@ -195,9 +221,9 @@ export default function PaymentComponent({
             <button
               type="button"
               onClick={handleProceed}
-              disabled={!selectedPaymentMethod || loading}
+              disabled={!paymentProof || loading}
               className={`w-[60%] py-3 px-4 rounded-lg font-semibold text-lg transition-colors ${
-                selectedPaymentMethod && !loading
+                paymentProof && !loading
                   ? "bg-red-600 text-white hover:bg-red-700"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}

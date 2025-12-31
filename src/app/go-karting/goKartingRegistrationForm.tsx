@@ -60,7 +60,7 @@ export default function GoKartingRegistrationForm() {
                   type="text"
                   name="full_name"
                   placeholder="Enter your full name"
-                  className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
+                  className="w-full text-black button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
                 />
               </div>
@@ -74,7 +74,7 @@ export default function GoKartingRegistrationForm() {
                   type="tel"
                   name="phone"
                   placeholder="+92 300 1234567"
-                  className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
+                  className="w-full text-black px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
                 />
               </div>
@@ -91,7 +91,7 @@ export default function GoKartingRegistrationForm() {
                   type="email"
                   name="email"
                   placeholder="your.email@example.com"
-                  className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
+                  className="w-full text-black button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
                 />
               </div>
@@ -105,7 +105,7 @@ export default function GoKartingRegistrationForm() {
                   type="number"
                   name="age"
                   placeholder="18"
-                  className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
+                  className="w-full text-black button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
                 />
               </div>
@@ -122,7 +122,7 @@ export default function GoKartingRegistrationForm() {
                   type="number"
                   name="weight"
                   placeholder="70"
-                  className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
+                  className="w-full text-black button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
                 />
                 <p className="text-xs text-gray-500 button-font mt-1">Required for kart selection</p>
@@ -137,7 +137,7 @@ export default function GoKartingRegistrationForm() {
                   type="number"
                   name="group_size"
                   placeholder="1"
-                  className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
+                  className="w-full text-black px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                 />
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function GoKartingRegistrationForm() {
                 </label>
                 <select
                   name="session_preference"
-                  className="w-full px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5] "
+                  className="w-full text-black px-4 py-3 border button-font border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent appearance-none bg-[#F5F5F5] "
                 >
                   <option value="">Morning (9:00 - 12:00)</option>
                   <option value="afternoon">Afternoon (12:00 - 4:00)</option>
@@ -168,7 +168,7 @@ export default function GoKartingRegistrationForm() {
                   type="date"
                   name="preferred_date"
                   placeholder="mm/dd/yyyy"
-                  className="w-full px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
+                  className="w-full text-black px-4 button-font py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5] "
                   required
                 />
               </div>
@@ -182,7 +182,7 @@ export default function GoKartingRegistrationForm() {
               <textarea
                 rows={4}
                 placeholder="Please mention any dietary restrictions, accessibility needs, or other special requirements..."
-                className="w-full button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]  resize-none"
+                className="w-full text-black button-font px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-[#F5F5F5]  resize-none"
               ></textarea>
             </div>
             <div className="flex justify-center">

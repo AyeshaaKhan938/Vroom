@@ -5,7 +5,7 @@ import CartComponent from "./CartComponent";
 import BillingComponent from "./BillingComponent";
 import PaymentComponent from "./PaymentComponent";
 import ConfirmationComponent from "./ConfirmationComponent";
-import { postJson } from "@/lib/api";
+import { postJson, postForm } from "@/lib/api";
 import type {
   BillingPayload,
   CartPayload,
@@ -96,9 +96,13 @@ export default function CheckoutFlow() {
       setLoading(true);
       resetError();
       try {
-        const response = await postJson<CheckoutApiResponse, PaymentPayload>(
+        const formData = new FormData();
+        formData.append("payment_method", payload.payment_method);
+        formData.append("payment_proof", payload.payment_proof);
+
+        const response = await postForm<CheckoutApiResponse>(
           `/checkout/${order.id}/payment`,
-          payload
+          formData
         );
         setOrder(response.order);
         if (typeof window !== "undefined") {

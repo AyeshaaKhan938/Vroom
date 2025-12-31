@@ -214,16 +214,16 @@ export default function Ticket() {
                       Quantity
                     </label>
                     <div className="flex items-center gap-3">
-                      <button className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100">
+                      <button className="w-8 h-8 border text-black border-gray-300 rounded flex items-center justify-center hover:bg-gray-100">
                         -
                       </button>
                       <input
                         type="number"
                         value="1"
-                        className="w-16 text-center border border-gray-300 rounded py-1"
+                        className="w-16 text-center text-black border border-gray-300 rounded py-1"
                         readOnly
                       />
-                      <button className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100">
+                      <button className="w-8 h-8  border border-gray-300 text-black rounded flex items-center justify-center hover:bg-gray-100">
                         +
                       </button>
                     </div>
@@ -282,19 +282,19 @@ export default function Ticket() {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Subtotal</span>
-                      <span className="font-semibold">
+                      <span className="font-semibold text-black">
                         {formatCurrency(orderTotals?.subtotal ?? 0, orderTotals?.currency)}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Service Fee</span>
-                      <span className="font-semibold">
+                      <span className="font-semibold text-black">
                         {formatCurrency(orderTotals?.serviceFee ?? 0, orderTotals?.currency)}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Tax</span>
-                      <span className="font-semibold">
+                      <span className="font-semibold text-black">
                         {formatCurrency(orderTotals?.tax ?? 0, orderTotals?.currency)}
                       </span>
                     </div>
