@@ -1,3 +1,35 @@
+Email Configuration
+
+This project uses Gmail SMTP with App Password for sending emails (Laravel Mail).
+
+Current Behavior
+
+Emails are sent on the following actions:
+
+User Registration
+
+Checkout
+
+Media Form Submission
+
+Admin receives email notifications
+
+Users also receive confirmation emails
+
+⚠️ Important Note  
+Currently, the email functionality is configured using a developer’s Gmail account via a Gmail App Password.
+
+The App Password is configured in the **backend `.env` file** using the variable:
+
+MAIL_PASSWORD
+
+
+⚠️ Required Change for Production
+
+Before deploying to production, you MUST replace the email credentials with the Admin / Company Email.
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
