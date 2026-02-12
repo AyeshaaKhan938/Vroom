@@ -2,23 +2,32 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  trailingSlash: true, // then link as "/contact/" everywhere
-  distDir: 'dist',
+  // Only enable static export for production build
+  ...(process.env.NODE_ENV === 'production' && {
+    output: 'export',
+    distDir: 'dist',
+  }),
+  
+  trailingSlash: true,
+  
   images: {
     unoptimized: true,
   },
   
-  // Chunk loading issues fix
+  // Optimize compilation speed
+  reactStrictMode: true,
+  swcMinify: true,
+  
+  // Experimental features
   experimental: {
-    optimizeCss: false, // CSS optimization issues avoid karne ke liye
+    optimizeCss: false,
   },
   
-  // Static files properly serve karne ke liye
+  // Cache static assets
   async headers() {
     return [
       {
-        source: '/_next/static/(.*)',
+        source: '/_next/static/:path*',
         headers: [
           {
             key: 'Cache-Control',
@@ -29,27 +38,75 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Webpack configuration
+  // Webpack optimization
   webpack: (config, { dev, isServer }) => {
-    // Production mein chunk loading errors handle karne ke liye
+    // Development mode optimizations
+    if (dev) {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+        ignored: [
+          '**/node_modules/**',
+          '**/.git/**',
+          '**/.next/**',
+          '**/dist/**',
+        ],
+      };
+      
+      // Faster rebuilds
+      config.cache = {
+        type: 'filesystem',
+        buildDependencies: {
+          config: [__filename],
+        },
+      };
+    }
+
+    // Production optimizations
     if (!dev && !isServer) {
       config.output.crossOriginLoading = 'anonymous';
       
-      // Chunk splitting optimization
-      if (config.optimization && config.optimization.splitChunks) {
-        config.optimization.splitChunks = {
-          ...config.optimization.splitChunks,
+      // Optimized chunk splitting
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
           cacheGroups: {
-            ...config.optimization.splitChunks.cacheGroups,
-            default: {
+            default: false,
+            vendors: false,
+            // Framework chunk (React, Next.js)
+            framework: {
+              name: 'framework',
+              chunks: 'all',
+              test: /[\\/]node_modules[\\/](react|react-dom|scheduler|next)[\\/]/,
+              priority: 40,
+              enforce: true,
+            },
+            // Lib chunk (other npm packages)
+            lib: {
+              test: /[\\/]node_modules[\\/]/,
+              name(module: any) {
+                const packageName = module.context.match(
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                )?.[1];
+                return `npm.${packageName?.replace('@', '')}`;
+              },
+              priority: 30,
+              minChunks: 1,
+              reuseExistingChunk: true,
+            },
+            // Common chunks
+            commons: {
+              name: 'commons',
               minChunks: 2,
-              priority: -20,
+              priority: 20,
               reuseExistingChunk: true,
             },
           },
-        };
-      }
+        },
+      };
     }
+
     return config;
   },
 };
