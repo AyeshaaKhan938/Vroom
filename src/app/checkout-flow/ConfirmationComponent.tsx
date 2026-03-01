@@ -1,0 +1,379 @@
+"use client";
+
+import Image from "next/image";
+import type { CheckoutOrder } from "./types";
+
+interface ConfirmationComponentProps {
+  order: CheckoutOrder;
+}
+
+function formatCurrency(amount: number, currency: string) {
+  return `${currency} ${amount.toLocaleString()}`;
+}
+
+function formatDateTime(iso?: string | null) {
+  if (!iso) return "Not available";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return iso;
+  }
+  return date.toLocaleString();
+}
+
+export default function ConfirmationComponent({
+  order,
+}: ConfirmationComponentProps) {
+  const metadata = order.metadata ?? {};
+
+  const metadataString = (value: unknown, fallback: string) =>
+    typeof value === "string" && value.trim().length > 0 ? value : fallback;
+
+  const bookingReference = order.booking_reference ?? order.reference;
+  const currency = order.amounts.currency ?? "PKR";
+
+  const billing = order.billing;
+  const customerName = billing
+    ? `${billing.first_name ?? ""} ${billing.last_name ?? ""}`.trim() ||
+      order.customer.name ||
+      "Not provided"
+    : order.customer.name || "Not provided";
+  const contactPhone = billing?.phone ?? order.customer.phone ?? "Not provided";
+  const contactEmail = billing?.email ?? order.customer.email ?? "Not provided";
+  const emergencyPhone = billing?.emergency_phone ?? metadataString(metadata.emergency_phone, "Not provided");
+
+  const paymentDetails = order.payment.details;
+  const paymentMethod = order.payment.method
+    ? order.payment.method.replace(/_/g, " ").toUpperCase()
+    : "Not specified";
+  const transactionId = paymentDetails?.transaction_id ?? "Pending";
+  const paymentDate = formatDateTime(paymentDetails?.paid_at);
+
+  const eventDate = metadataString(metadata.event_date, "March 15, 2024");
+  const eventTime = metadataString(metadata.event_time, "2:00 PM");
+  const eventDuration = metadataString(metadata.duration, "60 minutes");
+  const participantsLabel = metadataString(
+    metadata.participants_label,
+    `${order.cart.quantity} Participant${order.cart.quantity > 1 ? "s" : ""}`
+  );
+  const venueName = metadataString(metadata.venue, "Vroom Racing Circuit");
+  const venueAddress = metadataString(
+    metadata.venue_address,
+    "GT Road, Near Kallar Kahar, Chakwal District, Punjab, Pakistan"
+  );
+
+  const subtotalLabel = `${order.cart.product} (${order.cart.quantity}x)`;
+
+  return (
+    <div className="min-h-screen mt-40 satoshi-font bg-white">
+      {/* Breadcrumb Navigation */}
+      <div className="bg-white py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center space-x-2 text-sm">
+            <span className="text-gray-400">Cart</span>
+            <span className="text-gray-400">&gt;</span>
+            <span className="text-gray-400">Billing</span>
+            <span className="text-gray-400">&gt;</span>
+            <span className="text-gray-400">Payment</span>
+            <span className="text-gray-400">&gt;</span>
+            <div className="flex items-center">
+              <span className="text-green-600 font-semibold">Confirmation</span>
+              <div className="flex-1 flex justify-center">
+                <img
+                  src="/assets/images/green-circle.svg"
+                  alt="Confirmation"
+                  className="h-4 ml-1"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Payment Successful Section */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center w-20 h-20 mb-6">
+            <Image src="/assets/images/Vector.svg" alt="Success" width={72} height={72} />
+          </div>
+          <h1 className="text-4xl font-bold button-font text-[#00C851] mb-4">
+            Payment Successful!
+          </h1>
+          <p className="text-lg text-[#000000B2] mb-6">
+            Your booking has been confirmed
+          </p>
+          <div className="inline-block bg-[#E8F5E8] rounded-lg px-6 py-3">
+            <span className="text-[#00C851] font-semibold">
+              Booking Reference: {bookingReference}
+            </span>
+          </div>
+        </div>
+
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Booking Details Card */}
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-6">
+                Booking Details
+              </h2>
+
+              {/* Event Info */}
+              <div className="flex items-start space-x-4 mb-6">
+                <Image
+                  src="/assets/images/Order5.png"
+                  alt="Experience"
+                  width={70}
+                  height={50}
+                  className="rounded"
+                />
+
+                <div className="w-full">
+                  <h3 className="font-semibold button-font text-gray-900">
+                    {order.cart.product} {order.cart.package ? `- ${order.cart.package}` : ""}
+                  </h3>
+
+                  <div className="mt-3 space-y-2 text-sm text-gray-600 w-full">
+                    <div className="flex justify-between w-full">
+                      <span className="w-1/2 text-gray-700">Date & Time:</span>
+                      <span className="w-1/2 text-right text-gray-800 font-medium">
+                        {eventDate} - {eventTime}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between w-full">
+                      <span className="w-1/2 text-gray-700">Duration:</span>
+                      <span className="w-1/2 text-right text-gray-800 font-medium">
+                        {eventDuration}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between w-full">
+                      <span className="w-1/2 text-gray-700">Participants:</span>
+                      <span className="w-1/2 text-right text-gray-800 font-medium">
+                        {participantsLabel}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Participant Information */}
+              <div className="mb-6">
+                <h3 className="font-semibold text-gray-900 mb-3">Participant Information</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-[#F5F5F5] text-sm rounded-lg">
+                  <div>
+                    <p className="text-gray-600 font-medium">Primary Participant:</p>
+                    <p className="text-gray-900">{customerName}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 font-medium">Contact:</p>
+                    <p className="text-gray-900">{contactPhone}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 font-medium">Email:</p>
+                    <p className="text-gray-900">{contactEmail}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 font-medium">Emergency Contact:</p>
+                    <p className="text-gray-900">{emergencyPhone}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Venue Address */}
+              <div className="mb-6 p-2 bg-[#F5F5F5]">
+                <h3 className="font-semibold text-gray-900 mb-3">Venue Address</h3>
+                <div className="text-sm text-gray-600">
+                  <div className="font-medium text-gray-900 mb-1">{venueName}</div>
+                  <div className="mb-2">{venueAddress}</div>
+                  <button className="flex items-center text-red-600 hover:text-red-700">
+                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    View on Map
+                  </button>
+                </div>
+              </div>
+
+              {/* What to Bring */}
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-3">What to Bring</h3>
+                <div className="grid grid-cols-1 p-4 bg-[#F5F5F5] sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                  {["Valid CNIC or Passport", "Long pants recommended", "Closed-toe shoes", "Confirmation email"].map((item) => (
+                    <div key={item} className="flex items-center">
+                      <Image src="/assets/images/green-circle.svg" alt="Checklist" width={20} height={20} />
+                      <span className="text-gray-700 ml-2">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Receipt Card */}
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-6">
+                Payment Receipt
+              </h2>
+
+              <div className="space-y-3 mb-4 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">{subtotalLabel}</span>
+                  <span className="text-gray-900">
+                    {formatCurrency(order.amounts.subtotal, currency)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Service Fee</span>
+                  <span className="text-gray-900">
+                    {formatCurrency(order.amounts.service_fee, currency)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">GST (17%)</span>
+                  <span className="text-gray-900">
+                    {formatCurrency(order.amounts.tax, currency)}
+                  </span>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200 pt-3 mb-4">
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold button-font text-gray-900">
+                    Total Paid
+                  </span>
+                  <span className="text-2xl button-font font-bold text-green-600">
+                    {formatCurrency(order.amounts.total, currency)}
+                  </span>
+                </div>
+              </div>
+
+              <div className="space-y-2 text-sm text-gray-700">
+                <div className="flex justify-between">
+                  <span>Payment Method:</span>
+                  <span>{paymentMethod}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Transaction ID:</span>
+                  <span>{transactionId}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Payment Date:</span>
+                  <span>{paymentDate}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-6">
+            {/* Quick Actions Card */}
+            <div className="bg-[#F5F5F5] rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
+                Quick Actions
+              </h2>
+              <div className="space-y-3">
+                <button className="w-full bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center">
+                  <Image src="/assets/images/download.svg" alt="Download" width={24} height={24} />
+                  Download Receipt
+                </button>
+                <button className="w-full bg-white border border-red-600 text-red-600 py-3 px-4 rounded-lg hover:bg-red-50 transition-colors flex items-center justify-center">
+                  <Image src="/assets/images/calendar.svg" alt="Calendar" width={24} height={24} />
+                  Add to Calendar
+                </button>
+                <button className="w-full border bg-white border-red-600 text-red-600 py-3 px-4 rounded-lg hover:bg-red-50 transition-colors flex items-center justify-center">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                    />
+                  </svg>
+                  Share Booking
+                </button>
+              </div>
+            </div>
+
+            {/* Next Steps Card */}
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
+                Next Steps
+              </h2>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">
+                    1
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900">
+                      Confirmation Email
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      Check your inbox for detailed booking confirmation
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">
+                    2
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900">
+                      Arrive 30 Minutes Early
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      Complete registration and safety briefing
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">
+                    3
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900">
+                      Enjoy Your Experience
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      Get ready for the ultimate racing thrill!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Need Help Card */}
+            <div className="bg-[#F5F5F5] rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-bold button-font text-gray-900 mb-4">
+                Need Help?
+              </h2>
+              <div className="space-y-3">
+                <div>
+                  <div className="font-semibold text-gray-900 mb-1">Call Support</div>
+                  <div className="text-[#000000B2] font-medium">+92 300 VROOM-DI</div>
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900 mb-1">Email Support</div>
+                  <div className="text-[#000000B2] font-medium">support@vroomracing.pk</div>
+                </div>
+                <div className="pt-3 border-t border-gray-200">
+                  <div className="flex items-center text-sm">
+                    <Image src="/assets/images/times.svg" alt="Modify" width={24} height={24} />
+                    <span className="font-semibold text-gray-900 ml-2">Modify Booking</span>
+                  </div>
+                  <div className="text-sm text-[#000000B2] mt-1">Up to 24 hours before</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

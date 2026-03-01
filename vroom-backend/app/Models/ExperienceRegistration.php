@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ExperienceRegistration extends Model
+{
+    protected $fillable = [
+        'form_type',
+        'data',
+    ];
+
+    protected $casts = [
+        'data' => 'array',
+    ];
+}
+
+
